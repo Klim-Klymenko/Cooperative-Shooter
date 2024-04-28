@@ -1,9 +1,9 @@
 ﻿using GameCycle;
 using UnityEngine;
 
-namespace Objects
+namespace GameEngine
 {
-    internal sealed class CameraFollower : MonoBehaviour, ILateUpdateGameListener
+    internal sealed class FollowComponent : MonoBehaviour, ILateUpdateGameListener
     {
         [SerializeField]
         private Transform _transform;

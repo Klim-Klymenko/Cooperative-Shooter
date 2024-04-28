@@ -6,11 +6,11 @@ namespace GameEngine
 {
     public sealed class AttackMechanics
     {
-        private readonly IAtomicObservable<AtomicObject> _attackObservable;
+        private readonly IAtomicObservable<IAtomicObject> _attackObservable;
         private readonly IAtomicValue<bool> _attackCondition;
         private readonly IAtomicValue<int> _damage;
 
-        public AttackMechanics(IAtomicObservable<AtomicObject> attackObservable, IAtomicValue<bool> attackCondition, IAtomicValue<int> damage)
+        public AttackMechanics(IAtomicObservable<IAtomicObject> attackObservable, IAtomicValue<bool> attackCondition, IAtomicValue<int> damage)
         {
             _attackObservable = attackObservable;
             _attackCondition = attackCondition;
@@ -27,7 +27,7 @@ namespace GameEngine
             _attackObservable.Unsubscribe(OnAttack);
         }
         
-        private void OnAttack(AtomicObject target)
+        private void OnAttack(IAtomicObject target)
         {
             if (!_attackCondition.Value) return;
             

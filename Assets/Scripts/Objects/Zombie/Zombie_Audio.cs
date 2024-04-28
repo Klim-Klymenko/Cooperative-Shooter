@@ -22,7 +22,7 @@ namespace Objects
         public void Compose(Zombie_Core core)
         {
             IAtomicObservable attackObservable = core.AttackEvent;
-            IAtomicObservable deathObservable = core.DeathEvent;
+            IAtomicObservable deathObservable = core.DeathObservable;
             
             attackObservable.Subscribe(() => _audioSource.PlayOneShot(_attackClip));
             _deathSoundController = new DeathSoundController(deathObservable, _audioSource, _deathClip);

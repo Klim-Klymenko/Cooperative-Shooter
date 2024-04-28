@@ -11,7 +11,8 @@ namespace System
     [UsedImplicitly]
     internal sealed class RotateInputController : IStartGameListener, IUpdateGameListener
     {
-        private IAtomicVariable<Vector3> _rotateDirection;
+        private IAtomicVariable<Vector3> _rotationDirection;
+        private IAtomicValue<Vector3> _movementDirection;
         
         private readonly Camera _camera;
         private readonly Transform _transform;
@@ -26,21 +27,29 @@ namespace System
 
         void IStartGameListener.OnStart()
         {
-            _rotateDirection = _rotatable.GetVariable<Vector3>(RotatableAPI.RotateDirection);
+            _rotationDirection = _rotatable.GetVariable<Vector3>(RotatableAPI.RotationDirection);
+            _movementDirection = _rotatable.GetVariable<Vector3>(MovableAPI.MovementDirection);
         }
         
         void IUpdateGameListener.OnUpdate()
         {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            if (Input.GetMouseButton(0))
+            {
+                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+                if (!Physics.Raycast(ray, out RaycastHit hit)) return;
             
-            Vector3 targetPosition = hit.point;
+                Vector3 targetPosition = hit.point;
             
-            Vector3 direction = (targetPosition - _transform.position).normalized;
-            direction.y = 0;
+                Vector3 direction = (targetPosition - _transform.position).normalized;
+                direction.y = 0;
 
-            _rotateDirection.Value = direction;
+                _rotationDirection.Value = direction;
+                
+                return;
+            }
+            
+            _rotationDirection.Value = _movementDirection.Value;
         }
     }
 }

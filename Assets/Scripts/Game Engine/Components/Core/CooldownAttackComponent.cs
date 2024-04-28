@@ -7,22 +7,17 @@ using UnityEngine;
 namespace GameEngine
 {
     [Serializable]
-    [Is(ObjectTypes.Attacker)]
     public sealed class CooldownAttackComponent : IDisposable
     {
         [SerializeField]
-        [Get(AttackerAPI.AttackTargetTransform)]
-        private AtomicVariable<Transform> _targetTransform;
-        
-        [SerializeField]
         private AtomicValue<float> _attackRange;
         
+        private AtomicVariable<Transform> _targetTransform;
+        
         private readonly AtomicEvent _attackRequestEvent = new();
-        
-        [Get(AttackerAPI.AttackAction)]
-        private readonly AtomicEvent<AtomicObject> _attackEvent = new();
-        
+        private readonly AtomicEvent<IAtomicObject> _attackEvent = new();
         private readonly AtomicEvent _attackEventNonArgs = new();
+        
         private readonly AndExpression _attackCondition = new();
 
         [SerializeField]
@@ -34,13 +29,18 @@ namespace GameEngine
         
         [SerializeField]
         private AttackComponent _attackComponent;
-
+        
+        public IAtomicAction<IAtomicObject> AttackAction => _attackEvent;
+        
+        public IAtomicValue<Transform> TargetTransform => _targetTransform;
         public IAtomicExpression<bool> AttackCondition => _attackCondition;
         public IAtomicObservable AttackRequestEvent => _attackRequestEvent;
         public IAtomicObservable AttackEvent => _attackEventNonArgs;
         
-        public void Compose(Transform transform)
+        public void Compose(Transform transform, AtomicVariable<Transform> targetTransform)
         {
+            _targetTransform = targetTransform;
+            
             _isInAttackRange.Compose(_attackRange, _targetTransform, transform);
             
             _attackCondition.Append(new AtomicFunction<bool>(() => _targetTransform.Value != null));

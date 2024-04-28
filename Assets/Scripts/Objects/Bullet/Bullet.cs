@@ -8,10 +8,23 @@ using UnityEngine;
 
 namespace Objects
 {
+    [Is(ObjectTypes.Movable)]
     internal sealed class Bullet : AtomicObject, IDisposable, IUpdateGameListener, IFinishGameListener
     {
+        [Get(MovableAPI.MovementDirection)]
+        private IAtomicVariable<Vector3> MoveDirection => _moveComponent.MovementDirection;
+
+        [Get(MovableAPI.MoveCondition)]
+        private IAtomicValue<bool> MoveCondition => _moveComponent.MoveCondition;
+        
         [SerializeField]
         private Transform _transform;
+        
+        [SerializeField]
+        private MoveComponent _moveComponent;
+
+        [SerializeField]
+        private AttackComponent _attackComponent;
         
         private readonly AtomicEvent<AtomicObject> _attackEvent = new();
         
@@ -20,12 +33,6 @@ namespace Objects
         
         private readonly AtomicVariable<bool> _aliveCondition = new();
         private readonly BulletTakeDamageCondition _bulletTakeDamageCondition = new();
-
-        [SerializeField]
-        private MoveComponent _moveComponent;
-
-        [SerializeField]
-        private AttackComponent _attackComponent;
         
         private PassOnTargetMechanics _passOnTargetMechanics;
 

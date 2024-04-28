@@ -1,4 +1,5 @@
-﻿using Atomic.Elements;
+﻿using System.Threading.Tasks;
+using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
 using Common;
@@ -17,10 +18,12 @@ namespace System
         private Countdown _reloadCountdown;
         
         private readonly IAtomicObject _gun;
+        private readonly int _rotationToTargetTimeInMilliseconds;
         
-        internal ShootInputController(IAtomicObject gun)
+        internal ShootInputController(IAtomicObject gun, int rotationToTargetTimeInMilliseconds)
         {
             _gun = gun;
+            _rotationToTargetTimeInMilliseconds = rotationToTargetTimeInMilliseconds;
         }
 
         void IStartGameListener.OnStart()
@@ -60,8 +63,10 @@ namespace System
                 _fireCountdown.Reset();
         }
 
-        private void Shoot()
+        private async void Shoot()
         {
+            await Task.Delay(_rotationToTargetTimeInMilliseconds);
+            
             _shootAction.Invoke();
         }
     }

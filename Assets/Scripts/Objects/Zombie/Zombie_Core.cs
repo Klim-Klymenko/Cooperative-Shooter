@@ -13,26 +13,30 @@ namespace Objects
         [SerializeField]
         private Transform _transform;
         
-        [Section]
         [SerializeField] 
         private HealthComponent _healthComponent;
         
-        [Section]
         [SerializeField] 
         private CooldownAttackComponent _cooldownAttackComponent;
         
-        internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
+        internal IAtomicValue<int> CurrentHitPoints => _healthComponent.CurrentHitPoints;
+        internal IAtomicAction<int> TakeDamageAction => _healthComponent.TakeDamageEvent;
+        internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
+        
+        internal IAtomicValue<Transform> TargetTransform => _cooldownAttackComponent.TargetTransform;
+        internal IAtomicAction<IAtomicObject> AttackAction => _cooldownAttackComponent.AttackAction;
+        
         internal IAtomicObservable AttackRequestEvent => _cooldownAttackComponent.AttackRequestEvent;
         internal IAtomicObservable AttackEvent => _cooldownAttackComponent.AttackEvent;
-        internal IAtomicObservable DeathEvent => _healthComponent.DeathObservable;
+        internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         
-        internal void Compose()
+        internal void Compose(AtomicVariable<Transform> targetTransform)
         {
             _healthComponent.Compose();
 
             _cooldownAttackComponent.Let(it =>
             {
-                it.Compose(_transform);
+                it.Compose(_transform, targetTransform);
                 it.AttackCondition.Append(AliveCondition);
             });
         }

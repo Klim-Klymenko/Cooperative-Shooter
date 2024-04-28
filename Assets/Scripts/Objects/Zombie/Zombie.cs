@@ -1,26 +1,42 @@
-﻿using Atomic.Objects;
+﻿using Atomic.Elements;
+using Atomic.Objects;
 using GameCycle;
 using GameEngine;
 using UnityEngine;
 
 namespace Objects
 {
-    [Is(ObjectTypes.Zombie)]
+    [Is(ObjectTypes.Zombie, ObjectTypes.Damageable, ObjectTypes.Attacker, ObjectTypes.NavMeshAgent)]
     internal sealed class Zombie : AtomicObject, IUpdateGameListener, IFinishGameListener
     {
+        [Get(LiveableAPI.HitPoints)] 
+        private IAtomicValue<int> CurrentHitPoints => _core.CurrentHitPoints;
+        
+        [Get(LiveableAPI.TakeDamageAction)]
+        private IAtomicAction<int> TakeDamageAction => _core.TakeDamageAction;
+        
+        [Get(LiveableAPI.DeathObservable)]
+        private IAtomicObservable DeathObservable => _core.DeathObservable;
+
+        [Get(AttackerAPI.TargetTransform)] 
+        private readonly AtomicVariable<Transform> _targetTransform = new();
+
+        [Get(AttackerAPI.AttackAction)]
+        private IAtomicAction<IAtomicObject> AttackAction => _core.AttackAction;
+
+        [Get(VisualAPI.SkinnedMeshRenderer)]
+        private SkinnedMeshRenderer SkinnedMeshRenderer => _animation.SkinnedMeshRenderer;
+        
         [SerializeField]
         [Get(ZombieAPI.ZombieAnimatorDispatcher)]
         private ZombieAnimatorDispatcher _zombieAnimatorDispatcher;
         
-        [Section]
         [SerializeField]
         private Zombie_Core _core;
         
-        [Section]
         [SerializeField]
         private Zombie_AI _ai;
         
-        [Section]
         [SerializeField]
         private Zombie_Animation _animation;
         
@@ -33,7 +49,7 @@ namespace Objects
         {
             base.Compose();
 
-            _core.Compose();
+            _core.Compose(_targetTransform);
             _ai.Compose(_core);
             _animation.Compose(_core, _ai);
             _audio.Compose(_core);
@@ -65,7 +81,6 @@ namespace Objects
             _audio.OnDisable();
             
             _core?.Dispose();
-            _ai?.Dispose();
         }
     }
 }

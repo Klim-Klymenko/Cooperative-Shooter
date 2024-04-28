@@ -1,15 +1,11 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Objects;
 using Common;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace GameEngine
 {
     [Serializable]
-    [Is(ObjectTypes.Striker)]
     public sealed class ShootComponent : IDisposable
     {
         [SerializeField] 
@@ -19,7 +15,6 @@ namespace GameEngine
         private AtomicVariable<int> _charges;
 
         [SerializeField] 
-        [Get(ShooterAPI.ShootingInterval)]
         private AtomicValue<float> _shootingInterval;
         
         private readonly AtomicEvent _shootEvent = new();
@@ -31,9 +26,11 @@ namespace GameEngine
 
         [SerializeField] 
         [HideInInspector]
-        [Get(ShooterAPI.ShootAction)]
         private ShootAction _shootAction;
 
+        public IAtomicValue<float> ShootingInterval => _shootingInterval;
+        public IAtomicAction ShootAction => _shootAction;
+        
         public IAtomicVariable<int> Charges => _charges;
         public IAtomicObservable ShootObservable => _shootEvent;
         public IAtomicExpression<bool> ShootCondition => _shootCondition;

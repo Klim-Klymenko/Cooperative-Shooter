@@ -15,6 +15,9 @@ namespace System
         [SerializeField] 
         private Camera _camera;
         
+        [SerializeField]
+        private int _characterRotationTimeInMilliseconds;
+        
         public override void InstallBindings()
         {
             BindMoveController();
@@ -30,7 +33,7 @@ namespace System
 
         private void BindShootController()
         {
-            Container.BindInterfacesTo<ShootInputController>().AsSingle().WithArguments(_gun);
+            Container.BindInterfacesTo<ShootInputController>().AsSingle().WithArguments(_gun, _characterRotationTimeInMilliseconds);
         }
 
         private void BindRotationController()

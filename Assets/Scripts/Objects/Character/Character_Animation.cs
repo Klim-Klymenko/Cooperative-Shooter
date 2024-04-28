@@ -18,7 +18,7 @@ namespace Objects
         
         internal void Compose(Character_Core core)
         {
-            IAtomicObservable<int> takeDamageObservable = core.TakeDamageObservable;
+            IAtomicObservable<int> takeDamageObservable = core.TakeDamageEvent;
             IAtomicObservable deathObservable = core.DeathObservable;
             
             _takeDamageAnimationController = new TakeDamageAnimationController(takeDamageObservable, _animator);

@@ -1,16 +1,32 @@
+using Atomic.Elements;
 using Atomic.Objects;
 using GameCycle;
 using GameEngine;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace Objects
 {
-    [Is(ObjectTypes.Character)]
+    [Is(ObjectTypes.Character, ObjectTypes.Damageable, ObjectTypes.Movable)]
     internal sealed class Character : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
-        [Section]
+        [Get(LiveableAPI.HitPoints)] 
+        private IAtomicValue<int> CurrentHitPoints => _core.CurrentHitPoints;
+        
+        [Get(LiveableAPI.TakeDamageAction)]
+        private IAtomicAction<int> TakeDamageAction => _core.TakeDamageEvent;
+        
+        [Get(LiveableAPI.DeathObservable)]
+        private IAtomicObservable DeathObservable => _core.DeathObservable;
+        
+        [Get(MovableAPI.MovementDirection)]
+        private IAtomicVariable<Vector3> MovementDirection => _core.MovementDirection;
+
+        [Get(MovableAPI.MoveCondition)]
+        private IAtomicValue<bool> MoveCondition => _core.MoveCondition;
+        
+        [Get(RotatableAPI.RotationDirection)]
+        private IAtomicVariable<Vector3> RotationDirection => _core.RotationDirection;
+        
         [SerializeField]
         private Character_Core _core;
         

@@ -5,12 +5,12 @@ namespace GameEngine
     public sealed class ReplenishMechanics
     {
         private readonly IAtomicObservable _replenishObservable;
-        private readonly IAtomicVariable<int> _charges;
+        private readonly IAtomicVariable<int> _replenishable;
 
-        public ReplenishMechanics(IAtomicObservable replenishObservable, IAtomicVariable<int> charges)
+        public ReplenishMechanics(IAtomicObservable replenishObservable, IAtomicVariable<int> replenishable)
         {
             _replenishObservable = replenishObservable;
-            _charges = charges;
+            _replenishable = replenishable;
         }
         
         public void OnEnable()
@@ -25,7 +25,7 @@ namespace GameEngine
 
         private void OnReplenish()
         {
-            _charges.Value++;
+            _replenishable.Value++;
         }
     }
 }

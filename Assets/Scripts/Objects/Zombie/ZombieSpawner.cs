@@ -41,14 +41,8 @@ namespace Objects
             
             if (zombie.Is(ObjectTypes.Damageable))
             {
-                IAtomicObservable deathEvent = zombie.GetObservable(LiveableAPI.DeathObservable);
-                deathEvent.Subscribe(() => Despawn(zombie));
-            }
-            
-            if (zombie.Is(ObjectTypes.NavMeshAgent))
-            {
-                IAtomicVariable<Transform> agentTargetTransform = zombie.GetVariable<Transform>(AiAPI.AgentTargetTransform);
-                agentTargetTransform.Value = _characterTransform;
+                IAtomicObservable deathObservable = zombie.GetObservable(LiveableAPI.DeathObservable);
+                deathObservable.Subscribe(() => Despawn(zombie));
             }
 
             if (zombie.Is(ObjectTypes.Attacker))
@@ -56,7 +50,7 @@ namespace Objects
                 ZombieAnimatorDispatcher animatorDispatcher = zombie.Get<ZombieAnimatorDispatcher>(ZombieAPI.ZombieAnimatorDispatcher);
                 animatorDispatcher.Target = _character;
                 
-                IAtomicVariable<Transform> attackTargetTransform = zombie.GetVariable<Transform>(AttackerAPI.AttackTargetTransform);
+                IAtomicVariable<Transform> attackTargetTransform = zombie.GetVariable<Transform>(AttackerAPI.TargetTransform);
                 attackTargetTransform.Value = _characterTransform;
             }
             

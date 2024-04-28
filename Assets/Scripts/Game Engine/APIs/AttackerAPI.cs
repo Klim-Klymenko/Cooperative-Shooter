@@ -8,7 +8,7 @@ namespace GameEngine
     public static class AttackerAPI
     {
         [Contract(typeof(IAtomicVariable<Transform>))]
-        public const string AttackTargetTransform = nameof(AttackTargetTransform);
+        public const string TargetTransform = nameof(TargetTransform);
         
         [Contract(typeof(IAtomicAction<AtomicObject>))]
         public const string AttackAction = nameof(AttackAction);

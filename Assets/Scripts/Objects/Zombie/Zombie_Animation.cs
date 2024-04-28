@@ -10,7 +10,6 @@ namespace Objects
     internal sealed class Zombie_Animation
     {
         [SerializeField]
-        [Get(VisualAPI.SkinnedMeshRenderer)]
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         
         [SerializeField]
@@ -20,6 +19,8 @@ namespace Objects
         private MoveAnimationController _moveAnimationController;
         private AttackAnimationController _attackAnimationController;
         private SwitchAnimatorMechanics _switchAnimatorMechanics;
+        
+        internal SkinnedMeshRenderer SkinnedMeshRenderer => _skinnedMeshRenderer;
         
         public void Compose(Zombie_Core core, Zombie_AI ai)
         {

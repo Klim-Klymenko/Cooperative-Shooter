@@ -17,7 +17,7 @@ namespace GameEngine
         
         public IAtomicExpression<bool> AttackCondition => _attackCondition;
 
-        public void Compose(IAtomicObservable<AtomicObject> attackObservable)
+        public void Compose(IAtomicObservable<IAtomicObject> attackObservable)
         {
             _attackMechanics = new AttackMechanics(attackObservable, _attackCondition, _damage);
         }

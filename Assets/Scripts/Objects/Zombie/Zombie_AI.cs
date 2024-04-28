@@ -10,17 +10,16 @@ namespace Objects
     [Serializable]
     internal class Zombie_AI
     {
-        [Section]
         [SerializeField]
         private NavMeshAgentComponent _agentComponent;
-
-        public IAtomicValue<bool> MoveCondition => _agentComponent.MoveCondition;
+        
+        internal IAtomicValue<bool> MoveCondition => _agentComponent.MoveCondition;
         
         internal void Compose(Zombie_Core core)
         {
             _agentComponent.Let(it =>
             {
-                it.Compose();
+                it.Compose(core.TargetTransform);
                 it.MoveCondition.Append(core.AliveCondition);
             });
         }
@@ -38,11 +37,6 @@ namespace Objects
         public void OnDisable()
         {
             _agentComponent.OnDisable();
-        }
-        
-        public void Dispose()
-        {
-            _agentComponent?.Dispose();
         }
     }
 }

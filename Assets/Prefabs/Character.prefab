@@ -412,7 +412,7 @@ MonoBehaviour:
         value: 5
     _rotationComponent:
       _rotationSpeed:
-        value: 20
+        value: 25
   _animation:
     _animator: {fileID: 125547646}
   _audio:

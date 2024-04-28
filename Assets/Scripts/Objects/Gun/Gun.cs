@@ -9,13 +9,24 @@ using Zenject;
 
 namespace Objects
 {
+    [Is(ObjectTypes.Striker)]
     internal sealed class Gun : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
-        [Section]
+        [Get(SwitchableAPI.SwitchOnAction)]
+        private IAtomicAction SwitchOnAction => _switchGameObjectComponent.SwitchOnAction;
+        
+        [Get(SwitchableAPI.SwitchOffAction)]
+        private IAtomicAction SwitchOffAction => _switchGameObjectComponent.SwitchOffAction;
+        
+        [Get(ShooterAPI.ShootingInterval)]
+        private IAtomicValue<float> ShootingInterval => _shootComponent.ShootingInterval;
+        
+        [Get(ShooterAPI.ShootAction)]
+        private IAtomicAction ShootAction => _shootComponent.ShootAction;
+        
         [SerializeField]
         private SwitchGameObjectComponent _switchGameObjectComponent;
-
-        [Section]
+        
         [SerializeField] 
         private ShootComponent _shootComponent;
         
@@ -24,9 +35,9 @@ namespace Objects
         
         private readonly AndExpression _aliveCondition = new();
         
-        private ISpawner<Transform> _bulletSpawner;
+        internal IAtomicObservable ShootObservable => _shootComponent.ShootObservable;
         
-        public IAtomicObservable ShootObservable => _shootComponent.ShootObservable;
+        private ISpawner<Transform> _bulletSpawner;
         
         [Inject]
         internal void Construct(ISpawner<Transform> bulletSpawner)

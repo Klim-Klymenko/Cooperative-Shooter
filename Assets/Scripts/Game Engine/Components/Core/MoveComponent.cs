@@ -6,30 +6,27 @@ using UnityEngine;
 namespace GameEngine
 {
     [Serializable]
-    [Is(ObjectTypes.Movable)]
     public sealed class MoveComponent : IDisposable
     {
         [SerializeField] 
         private AtomicValue<float> _moveSpeed;
         
-        [Get(MovableAPI.MoveDirection)]
-        private AtomicVariable<Vector3> _moveDirection = new();
-        
+        private AtomicVariable<Vector3> _movementDirection = new();
         private readonly AndExpression _moveCondition = new();
         
         private MoveMechanics _moveMechanics;
-        
-        [Get(MovableAPI.MoveCondition)]
+
+        public IAtomicVariable<Vector3> MovementDirection => _movementDirection;
         public IAtomicExpression<bool> MoveCondition => _moveCondition;
         
         public void Compose(Transform transform, AtomicVariable<Vector3> direction = null)
         {
             if (direction != null)
-                _moveDirection = direction;
+                _movementDirection = direction;
             
-            _moveCondition.Append(new AtomicFunction<bool>(() => _moveDirection.Value != Vector3.zero));
+            _moveCondition.Append(new AtomicFunction<bool>(() => _movementDirection.Value != Vector3.zero));
             
-            _moveMechanics = new MoveMechanics(_moveDirection, _moveSpeed, _moveCondition, transform);
+            _moveMechanics = new MoveMechanics(_movementDirection, _moveSpeed, _moveCondition, transform);
         }
         
         public void Update()
@@ -39,7 +36,7 @@ namespace GameEngine
 
         public void Dispose()
         {
-            _moveDirection?.Dispose();
+            _movementDirection?.Dispose();
         }
     }
 }

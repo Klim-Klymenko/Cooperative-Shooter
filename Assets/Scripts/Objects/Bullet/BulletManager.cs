@@ -35,9 +35,9 @@ namespace Objects
             
             bullet.Compose();
 
-            IAtomicObservable destroyEvent = bullet.GetObservable(LiveableAPI.DeathObservable);
+            IAtomicObservable destroyObservable = bullet.GetObservable(LiveableAPI.DeathObservable);
            
-            destroyEvent.Subscribe(() => Despawn(bulletTransform));
+            destroyObservable.Subscribe(() => Despawn(bulletTransform));
             
             if (!_gameCycleManager.ContainsListener(bullet))
                 _gameCycleManager.AddListener(bullet);

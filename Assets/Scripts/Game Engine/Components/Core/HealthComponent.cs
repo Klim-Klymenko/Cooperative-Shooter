@@ -7,18 +7,14 @@ using UnityEngine;
 namespace GameEngine
 {
     [Serializable]
-    [Is(ObjectTypes.Damageable)]
     public sealed class HealthComponent : IDisposable
     {
         [SerializeField]
         private int _hitPoints;
-
-        [Get(LiveableAPI.HitPoints)] 
+        
         private AtomicVariable<int> _currentHitPoints;
         
-        [Get(LiveableAPI.TakeDamageAction)]
         private readonly AtomicEvent<int> _takeDamageEvent = new();
-        
         private readonly AtomicEvent _deathEvent = new();
         
         private readonly AtomicFunction<bool> _aliveCondition = new();
@@ -26,12 +22,11 @@ namespace GameEngine
         private TakeDamageMechanics _takeDamageMechanics;
         private DeathMechanics _deathMechanics;
         
-        public IAtomicValue<bool> AliveCondition => _aliveCondition;
-        
-        public IAtomicObservable<int> TakeDamageObservable => _takeDamageEvent;
-        
-        [Get(LiveableAPI.DeathObservable)]
+        public IAtomicValue<int> CurrentHitPoints => _currentHitPoints;
+        public IAtomicEvent<int> TakeDamageEvent => _takeDamageEvent;
         public IAtomicObservable DeathObservable => _deathEvent;
+        
+        public IAtomicValue<bool> AliveCondition => _aliveCondition;
         
         public void Compose()
         {

@@ -11,13 +11,12 @@ namespace GameEngine
         [SerializeField]
         private AtomicValue<float> _rotationSpeed;
         
-        [Get(RotatableAPI.RotateDirection)]
         private readonly AtomicVariable<Vector3> _rotationDirection = new();
-        
         private readonly AndExpression _rotationCondition = new();
         
         private RotateMechanics _rotateMechanics;
 
+        public IAtomicVariable<Vector3> RotationDirection => _rotationDirection;
         public IAtomicExpression<bool> RotationCondition => _rotationCondition;
 
         public void Compose(Transform transform)

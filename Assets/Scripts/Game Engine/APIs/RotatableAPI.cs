@@ -7,6 +7,6 @@ namespace GameEngine
     public static class RotatableAPI
     {
         [Contract(typeof(IAtomicVariable<Vector3>))]
-        public const string RotateDirection = nameof(RotateDirection);
+        public const string RotationDirection = nameof(RotationDirection);
     }
 }

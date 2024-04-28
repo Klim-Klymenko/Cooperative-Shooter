@@ -36,7 +36,7 @@ namespace Objects
         
         public void Compose(Character_Core core)
         {
-            IAtomicObservable<int> takeDamageObservable = core.TakeDamageObservable;
+            IAtomicObservable<int> takeDamageObservable = core.TakeDamageEvent;
             IAtomicObservable deathObservable = core.DeathObservable;
             IAtomicObservable shootObservable = core.ShootObservable;
             IAtomicValue<bool> takeDamageClipCondition = core.AliveCondition;

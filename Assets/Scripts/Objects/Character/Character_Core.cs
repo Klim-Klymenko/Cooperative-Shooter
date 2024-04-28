@@ -16,22 +16,26 @@ namespace Objects
         [SerializeField]
         private Gun _currentGun;
         
-        [Section]
         [SerializeField]
         private HealthComponent _healthComponent;
         
-        [Section]
         [SerializeField]
         private MoveComponent _moveComponent;
-
-        [Section]
+        
         [SerializeField]
         private RotationComponent _rotationComponent;
-        
-        internal IAtomicObservable<int> TakeDamageObservable => _healthComponent.TakeDamageObservable;
-        internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
+
         internal IAtomicObservable ShootObservable => _currentGun.ShootObservable;
+        
+        internal IAtomicValue<int> CurrentHitPoints => _healthComponent.CurrentHitPoints;
+        internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
+        internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
+        
+        internal IAtomicVariable<Vector3> MovementDirection => _moveComponent.MovementDirection;
         internal IAtomicValue<bool> MoveCondition => _moveComponent.MoveCondition;
+        
+        internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
+        
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         
         internal void Compose()

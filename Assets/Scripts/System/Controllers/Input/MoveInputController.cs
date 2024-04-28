@@ -25,7 +25,7 @@ namespace System
 
         void IStartGameListener.OnStart()
         {
-            _moveDirection = _movable.GetVariable<Vector3>(MovableAPI.MoveDirection);
+            _moveDirection = _movable.GetVariable<Vector3>(MovableAPI.MovementDirection);
         }
 
         void IUpdateGameListener.OnUpdate()

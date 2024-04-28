@@ -7,12 +7,11 @@ namespace GameEngine
     [Serializable]
     public sealed class ReplenishComponent : IDisposable
     {
-        private readonly AtomicEvent _replenishEvent = new();
-
-        private readonly AndExpression _replenishCondition = new();
-        
         [SerializeField] 
         private CooldownComponent _cooldownComponent;
+        
+        private readonly AtomicEvent _replenishEvent = new();
+        private readonly AndExpression _replenishCondition = new();
         
         private ReplenishMechanics _replenishMechanics;
 

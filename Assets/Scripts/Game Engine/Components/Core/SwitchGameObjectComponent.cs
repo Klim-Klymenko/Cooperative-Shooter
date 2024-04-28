@@ -8,14 +8,14 @@ namespace GameEngine
     [Serializable]
     public sealed class SwitchGameObjectComponent : IDisposable
     {
-        [Get(SwitchableAPI.SwitchOnAction)]
         private readonly AtomicEvent _switchOnEvent = new();
-        
-        [Get(SwitchableAPI.SwitchOffAction)]
         private readonly AtomicEvent _switchOffEvent = new();
         
         private SwitchGameObjectMechanics _switchGameObjectMechanics;
 
+        public IAtomicAction SwitchOnAction => _switchOnEvent;
+        public IAtomicAction SwitchOffAction => _switchOffEvent;
+        
         public void Compose(GameObject gameObject)
         {
             _switchGameObjectMechanics = new SwitchGameObjectMechanics(gameObject, _switchOnEvent, _switchOffEvent);

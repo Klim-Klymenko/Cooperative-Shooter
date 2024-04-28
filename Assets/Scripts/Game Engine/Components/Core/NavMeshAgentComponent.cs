@@ -1,23 +1,19 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Objects;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace GameEngine
 {
     [Serializable]
-    [Is(ObjectTypes.NavMeshAgent)]
-    public sealed class NavMeshAgentComponent : IDisposable
+    public sealed class NavMeshAgentComponent
     {
         [SerializeField] 
         private NavMeshAgent _agent;
         
         private float _stoppingDistance;
         
-        [SerializeField]
-        [Get(AiAPI.AgentTargetTransform)]
-        private AtomicVariable<Transform> _targetTransform;
+        private IAtomicValue<Transform> _targetTransform;
         
         private readonly AndExpression _followCondition = new();
         private readonly AndExpression _moveCondition = new();
@@ -31,8 +27,9 @@ namespace GameEngine
         
         public IAtomicExpression<bool> MoveCondition => _moveCondition;
         
-        public void Compose()
+        public void Compose(IAtomicValue<Transform> targetTransform) 
         {
+            _targetTransform = targetTransform;
             _stoppingDistance = _agent.stoppingDistance;
                 
             _followCondition.Append(new AtomicFunction<bool>(() => _targetTransform.Value != null));
@@ -60,11 +57,6 @@ namespace GameEngine
         public void OnDisable()
         {
             _switchNavMeshAgentMechanics.OnDisable();
-        }
-
-        public void Dispose()
-        {
-            _targetTransform?.Dispose();
         }
     }
 }
