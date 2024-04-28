@@ -1,4 +1,5 @@
 ﻿using Atomic.Objects;
+using Common.LocalInput;
 using UnityEngine;
 using Zenject;
 
@@ -20,24 +21,20 @@ namespace System
         
         public override void InstallBindings()
         {
-            BindMoveController();
-            BindShootController();
-            BindRotationController();
+            BindInput();
+            BindInputControllers();
             BindFinishGameController();
         }
 
-        private void BindMoveController()
+        private void BindInput()
+        {
+            Container.Bind<InputFacade>().AsSingle();
+        }
+        
+        private void BindInputControllers()
         {
             Container.BindInterfacesTo<MoveInputController>().AsSingle().WithArguments(_character);
-        }
-
-        private void BindShootController()
-        {
             Container.BindInterfacesTo<ShootInputController>().AsSingle().WithArguments(_gun, _characterRotationTimeInMilliseconds);
-        }
-
-        private void BindRotationController()
-        {
             Container.BindInterfacesTo<RotateInputController>().AsSingle().WithArguments(_camera, _character.transform, _character);
         }
         

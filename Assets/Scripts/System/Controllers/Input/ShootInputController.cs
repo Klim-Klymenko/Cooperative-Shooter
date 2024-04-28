@@ -3,6 +3,7 @@ using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
 using Common;
+using Common.LocalInput;
 using GameCycle;
 using GameEngine;
 using JetBrains.Annotations;
@@ -16,12 +17,14 @@ namespace System
         private IAtomicAction _shootAction;
         private Countdown _fireCountdown;
         private Countdown _reloadCountdown;
-        
+
+        private readonly InputFacade _input;
         private readonly IAtomicObject _gun;
         private readonly int _rotationToTargetTimeInMilliseconds;
         
-        internal ShootInputController(IAtomicObject gun, int rotationToTargetTimeInMilliseconds)
+        internal ShootInputController(InputFacade input, IAtomicObject gun, int rotationToTargetTimeInMilliseconds)
         {
+            _input = input;
             _gun = gun;
             _rotationToTargetTimeInMilliseconds = rotationToTargetTimeInMilliseconds;
         }
@@ -41,7 +44,7 @@ namespace System
         {
             _reloadCountdown.Tick(Time.deltaTime);
             
-            if (Input.GetMouseButtonDown(0))
+            if (_input.ShootingStartButton)
             {
                 if (_reloadCountdown.IsPlaying()) return;
                 
@@ -49,7 +52,7 @@ namespace System
                 _reloadCountdown.Reset();
             }
             
-            else if (Input.GetMouseButton(0))
+            else if (_input.ShootingContinueButton)
             {
                 _fireCountdown.Tick(Time.deltaTime);
             
@@ -59,7 +62,7 @@ namespace System
                 _fireCountdown.Reset();
             }
             
-            else if (Input.GetMouseButtonUp(0))
+            else if (_input.ShootingStopButton)
                 _fireCountdown.Reset();
         }
 

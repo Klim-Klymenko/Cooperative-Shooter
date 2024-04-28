@@ -1,6 +1,7 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
+using Common.LocalInput;
 using GameCycle;
 using GameEngine;
 using JetBrains.Annotations;
@@ -13,13 +14,15 @@ namespace System
     {
         private IAtomicVariable<Vector3> _rotationDirection;
         private IAtomicValue<Vector3> _movementDirection;
-        
+
+        private readonly InputFacade _input;
         private readonly Camera _camera;
         private readonly Transform _transform;
         private readonly IAtomicObject _rotatable;
 
-        internal RotateInputController(Camera camera, Transform transform, IAtomicObject rotatable)
+        internal RotateInputController(InputFacade input, Camera camera, Transform transform, IAtomicObject rotatable)
         {
+            _input = input;
             _camera = camera;
             _transform = transform;
             _rotatable = rotatable;
@@ -35,7 +38,7 @@ namespace System
         {
             if (Input.GetMouseButton(0))
             {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                Ray ray = _camera.ScreenPointToRay(_input.MousePosition);
 
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
             
