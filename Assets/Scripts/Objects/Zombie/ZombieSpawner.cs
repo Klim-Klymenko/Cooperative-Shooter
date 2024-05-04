@@ -39,13 +39,13 @@ namespace Objects
             
             zombie.Compose();
             
-            if (zombie.Is(ObjectTypes.Damageable))
+            if (zombie.Is(TypeAPI.Damageable))
             {
                 IAtomicObservable deathObservable = zombie.GetObservable(LiveableAPI.DeathObservable);
                 deathObservable.Subscribe(() => Despawn(zombie));
             }
 
-            if (zombie.Is(ObjectTypes.Attacker))
+            if (zombie.Is(TypeAPI.Attacker))
             {
                 ZombieAnimatorDispatcher animatorDispatcher = zombie.Get<ZombieAnimatorDispatcher>(ZombieAPI.ZombieAnimatorDispatcher);
                 animatorDispatcher.Target = _character;

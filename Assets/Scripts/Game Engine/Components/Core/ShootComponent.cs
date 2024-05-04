@@ -17,36 +17,49 @@ namespace GameEngine
         [SerializeField] 
         private AtomicValue<float> _shootingInterval;
         
+        private readonly AtomicEvent _shootRequestEvent = new();
         private readonly AtomicEvent _shootEvent = new();
+        
+        private readonly AtomicAction _triggerShootAction = new();
+        private readonly AtomicAction _bulletSpawnAction = new();
+        
         private readonly AndExpression _shootCondition = new();
         
-        [SerializeField]
-        [HideInInspector]
-        private AtomicAction _bulletSpawnAction;
-
-        [SerializeField] 
-        [HideInInspector]
-        private ShootAction _shootAction;
-
+        private ShootMechanics _shootMechanics;
+        
         public IAtomicValue<float> ShootingInterval => _shootingInterval;
-        public IAtomicAction ShootAction => _shootAction;
+        public IAtomicAction ShootRequestAction => _triggerShootAction;
+        public IAtomicAction ShootAction => _shootEvent;
         
         public IAtomicVariable<int> Charges => _charges;
+        public IAtomicObservable ShootRequestObservable => _shootRequestEvent;
         public IAtomicObservable ShootObservable => _shootEvent;
         public IAtomicExpression<bool> ShootCondition => _shootCondition;
 
         public void Compose(ISpawner<Transform> bulletSpawner)
         {
+            _shootCondition.Append(new AtomicFunction<bool>(() => _charges.Value > 0));
+            
+            _triggerShootAction.Compose(() => { if (_shootCondition.Invoke()) _shootRequestEvent.Invoke(); });
             _bulletSpawnAction.Compose(() => bulletSpawner.Spawn());
             
-            _shootCondition.Append(new AtomicFunction<bool>(() => _charges.Value > 0));
+            _shootMechanics = new ShootMechanics(_charges, _bulletSpawnAction, _shootEvent);
+        }
 
-            _shootAction.Compose(_charges, _bulletSpawnAction, _shootEvent, _shootCondition);
+        public void OnEnable()
+        {
+            _shootMechanics.OnEnable();
+        }
+
+        public void OnDisable()
+        {
+            _shootMechanics.OnDisable();
         }
         
         public void Dispose()
         {
             _charges?.Dispose();
+            _shootRequestEvent?.Dispose();
             _shootEvent?.Dispose();
         }
     }

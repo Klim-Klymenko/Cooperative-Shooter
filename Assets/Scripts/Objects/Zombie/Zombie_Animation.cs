@@ -29,8 +29,8 @@ namespace Objects
 
             _switchSkinnedMeshRendererMechanics = new SwitchSkinnedMeshRendererMechanics(_skinnedMeshRenderer);
             _switchAnimatorMechanics = new SwitchAnimatorMechanics(_animator);
-            _moveAnimationController = new MoveAnimationController(moveCondition, _animator);
-            _attackAnimationController = new AttackAnimationController(attackRequestEvent, _animator);
+            _moveAnimationController = new MoveAnimationController(_animator, moveCondition);
+            _attackAnimationController = new AttackAnimationController(_animator, attackRequestEvent);
         }
 
         internal void OnEnable()

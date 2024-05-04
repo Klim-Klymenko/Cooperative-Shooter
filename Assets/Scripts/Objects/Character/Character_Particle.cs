@@ -12,35 +12,41 @@ namespace Objects
         private ParticleSystem _damageParticle;
         
         [SerializeField]
-        private ParticleSystem _attackParticle;
-        
-        [SerializeField]
         private ParticleSystem _moveParticle;
         
         private readonly AtomicEvent _moveParticlePlayEvent = new();
         private readonly AtomicEvent _moveParticleStopEvent = new();
+
+        private AttackParticleController _attackParticleController;
         
         private MoveTimeController _moveTimeParticleController;
         
         public void Compose(Character_Core core)
         {
-            IAtomicObservable<int> takeDamageObservable = core.TakeDamageEvent;
-            IAtomicObservable shootObservable = core.ShootObservable;
-            IAtomicValue<bool> moveCondition = core.MoveCondition;
-            
             AtomicValue<float> moveParticleDuration = new(_moveParticle.main.duration);
+
+            _attackParticleController = new AttackParticleController(core.CurrentGun, core.AttackObservable);
             
-            takeDamageObservable.Subscribe(_ => _damageParticle.Play(withChildren: true));
-            shootObservable.Subscribe(() => _attackParticle.Play(withChildren: true));
+            core.TakeDamageEvent.Subscribe(_ => _damageParticle.Play(withChildren: true));
             
-            _moveTimeParticleController = new MoveTimeController(moveCondition, moveParticleDuration, _moveParticlePlayEvent, _moveParticleStopEvent);
+            _moveTimeParticleController = new MoveTimeController(core.MoveCondition, moveParticleDuration, _moveParticlePlayEvent, _moveParticleStopEvent);
             _moveParticlePlayEvent.Subscribe(() => _moveParticle.Play());
             _moveParticleStopEvent.Subscribe(() => _moveParticle.Stop());
+        }
+
+        public void OnEnable()
+        {
+            _attackParticleController.OnEnable();
         }
         
         public void Update()
         {
             _moveTimeParticleController.Update();
+        }
+
+        public void OnDisable()
+        {
+            _attackParticleController.OnDisable();
         }
         
         public void Dispose()

@@ -6,14 +6,14 @@ namespace GameEngine
     public sealed class DeathAnimationController
     {
         private static readonly int _deathTrigger = Animator.StringToHash("Death");
-        
-        private readonly IAtomicObservable _deathObservable;
-        private readonly Animator _animator;
 
-        public DeathAnimationController(IAtomicObservable deathObservable, Animator animator)
+        private readonly Animator _animator;
+        private readonly IAtomicObservable _deathObservable;
+
+        public DeathAnimationController(Animator animator, IAtomicObservable deathObservable)
         {
-            _deathObservable = deathObservable;
             _animator = animator;
+            _deathObservable = deathObservable;
         }
         
         public void OnEnable()

@@ -18,13 +18,10 @@ namespace Objects
         
         internal void Compose(Character_Core core)
         {
-            IAtomicObservable<int> takeDamageObservable = core.TakeDamageEvent;
-            IAtomicObservable deathObservable = core.DeathObservable;
-            
-            _takeDamageAnimationController = new TakeDamageAnimationController(takeDamageObservable, _animator);
-            _deathAnimationController = new DeathAnimationController(deathObservable, _animator);
-            _moveAnimationController = new MoveAnimationController(core.MoveCondition, _animator);
-            _attackAnimationController = new AttackAnimationController(core.ShootObservable, _animator);
+            _takeDamageAnimationController = new TakeDamageAnimationController(_animator, core.TakeDamageEvent);
+            _deathAnimationController = new DeathAnimationController(_animator, core.DeathObservable);
+            _moveAnimationController = new MoveAnimationController(_animator, core.MoveCondition, core.CurrentGunIndex);
+            _attackAnimationController = new AttackAnimationController(_animator, core.AttackRequestObservable);
         }
         
         internal void OnEnable()

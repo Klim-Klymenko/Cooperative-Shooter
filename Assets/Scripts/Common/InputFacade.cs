@@ -15,6 +15,10 @@ namespace Common.LocalInput
         private const int Mouse1 = 1;
 
         private const KeyCode E = KeyCode.E;
+        
+        private const KeyCode Alpha1 = KeyCode.Alpha1;
+        private const KeyCode Alpha2 = KeyCode.Alpha2;
+        private const KeyCode Alpha3 = KeyCode.Alpha3;
 
         #endregion
 
@@ -32,6 +36,18 @@ namespace Common.LocalInput
         private bool IsE => Input.GetKey(E);
         private bool IsEUp => Input.GetKeyUp(E);
         
+        private bool IsAlpha1Down => Input.GetKeyDown(Alpha1);
+        private bool IsAlpha1 => Input.GetKey(Alpha1);
+        private bool IsAlpha1Up => Input.GetKeyUp(Alpha1);
+        
+        private bool IsAlpha2Down => Input.GetKeyDown(Alpha2);
+        private bool IsAlpha2 => Input.GetKey(Alpha2);
+        private bool IsAlpha2Up => Input.GetKeyUp(Alpha2);
+        
+        private bool IsAlpha3Down => Input.GetKeyDown(Alpha3);
+        private bool IsAlpha3 => Input.GetKey(Alpha3);
+        private bool IsAlpha3Up => Input.GetKeyUp(Alpha3);
+        
         public float HorizontalAxis => Input.GetAxisRaw(Horizontal);
         public float VerticalAxis => Input.GetAxisRaw(Vertical);
 
@@ -44,6 +60,10 @@ namespace Common.LocalInput
         public bool ShootingStartButton => IsM0Down;
         public bool ShootingContinueButton => IsM0;
         public bool ShootingStopButton => IsM0Up;
+        
+        public bool SwitchingSlot1Button => IsAlpha1Down;
+        public bool SwitchingSlot2Button => IsAlpha2Down;
+        public bool SwitchingSlot3Button => IsAlpha3Down;
 
         #endregion
     }

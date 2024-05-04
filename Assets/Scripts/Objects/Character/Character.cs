@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Objects
 {
-    [Is(ObjectTypes.Character, ObjectTypes.Damageable, ObjectTypes.Movable)]
+    [Is(TypeAPI.Character, TypeAPI.Damageable, TypeAPI.Movable, TypeAPI.Striker, TypeAPI.Attacker)]
     internal sealed class Character : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
         [Get(LiveableAPI.HitPoints)] 
@@ -26,6 +26,15 @@ namespace Objects
         
         [Get(RotatableAPI.RotationDirection)]
         private IAtomicVariable<Vector3> RotationDirection => _core.RotationDirection;
+        
+        [Get(WeaponAPI.CurrentWeaponIndex)]
+        private IAtomicVariable<int> CurrentGunIndex => _core.CurrentGunIndex;
+        
+        [Get(WeaponAPI.SwitchingWeaponObservable)]
+        private IAtomicObservable<int> SwitchingGunObservable => _core.SwitchingGunObservable;
+        
+        [Get(WeaponAPI.CurrentWeapon)]
+        private IAtomicValue<IAtomicObject> CurrentGun => _core.CurrentGun;
         
         [SerializeField]
         private Character_Core _core;
@@ -51,6 +60,7 @@ namespace Objects
             _core.OnEnable();
             _animation.OnEnable();
             _audio.OnEnable();
+            _particle.OnEnable();
         }
 
         void IInitializeGameListener.OnInitialize()
@@ -71,6 +81,7 @@ namespace Objects
             _core.OnDisable();
             _animation.OnDisable();
             _audio.OnDisable();
+            _particle.OnDisable();
             
             _core.Dispose();
             _audio.Dispose();

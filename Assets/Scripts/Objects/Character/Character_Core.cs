@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
@@ -14,9 +15,6 @@ namespace Objects
         private Transform _transform;
         
         [SerializeField]
-        private Gun _currentGun;
-        
-        [SerializeField]
         private HealthComponent _healthComponent;
         
         [SerializeField]
@@ -24,19 +22,26 @@ namespace Objects
         
         [SerializeField]
         private RotationComponent _rotationComponent;
-
-        internal IAtomicObservable ShootObservable => _currentGun.ShootObservable;
+        
+        [SerializeField]
+        private WeaponComponent _weaponComponent;
+        
+        [SerializeField]
+        private SwitchingItemComponent _switchingItemComponent;
         
         internal IAtomicValue<int> CurrentHitPoints => _healthComponent.CurrentHitPoints;
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
-        
         internal IAtomicVariable<Vector3> MovementDirection => _moveComponent.MovementDirection;
         internal IAtomicValue<bool> MoveCondition => _moveComponent.MoveCondition;
-        
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
+        internal IAtomicVariable<int> CurrentGunIndex => _switchingItemComponent.CurrentItemIndex;
+        internal IAtomicObservable<int> SwitchingGunObservable => _switchingItemComponent.SwitchingItemObservable;
+        internal IAtomicValue<IAtomicObject> CurrentGun => _switchingItemComponent.CurrentItem;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
+        internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;
+        internal IAtomicObservable AttackObservable => _weaponComponent.AttackObservable;
         
         internal void Compose()
         {
@@ -53,11 +58,17 @@ namespace Objects
                 it.Compose(_transform);
                 it.RotationCondition.Append(AliveCondition);
             });
+
+            _weaponComponent.Compose();
+            
+            AtomicObject[] weapons = _weaponComponent.Weapons.Select(it => it as AtomicObject).ToArray();
+            _switchingItemComponent.Compose(weapons);
         }
         
         internal void OnEnable()
         {
             _healthComponent.OnEnable();
+            _switchingItemComponent.OnEnable();
         }
         
         internal void Update()
@@ -69,6 +80,7 @@ namespace Objects
         internal void OnDisable()
         {
             _healthComponent.OnDisable();
+            _switchingItemComponent.OnDisable();
         }
         
         public void Dispose()
@@ -76,6 +88,7 @@ namespace Objects
             _healthComponent?.Dispose();
             _moveComponent?.Dispose();
             _rotationComponent?.Dispose();
+            _switchingItemComponent.Dispose();
         }
     }
 }

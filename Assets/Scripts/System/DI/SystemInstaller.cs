@@ -9,15 +9,9 @@ namespace System
     {
         [SerializeField]
         private AtomicObject _character;
-
-        [SerializeField]
-        private AtomicObject _gun;
         
         [SerializeField] 
         private Camera _camera;
-        
-        [SerializeField]
-        private int _characterRotationTimeInMilliseconds;
         
         public override void InstallBindings()
         {
@@ -33,9 +27,10 @@ namespace System
         
         private void BindInputControllers()
         {
-            Container.BindInterfacesTo<MoveInputController>().AsSingle().WithArguments(_character);
-            Container.BindInterfacesTo<ShootInputController>().AsSingle().WithArguments(_gun, _characterRotationTimeInMilliseconds);
-            Container.BindInterfacesTo<RotateInputController>().AsSingle().WithArguments(_camera, _character.transform, _character);
+            Container.BindInterfacesTo<MovementInputController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesTo<ShootingInputController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesTo<RotationInputController>().AsSingle().WithArguments(_camera, _character.transform, _character);
+            Container.BindInterfacesTo<SwitchingGunController>().AsSingle().WithArguments(_character);
         }
         
         private void BindFinishGameController()

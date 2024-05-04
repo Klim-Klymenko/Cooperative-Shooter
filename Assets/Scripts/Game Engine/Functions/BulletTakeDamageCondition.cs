@@ -12,7 +12,7 @@ namespace GameEngine
         {
             if (!collision.gameObject.TryGetComponent(out AtomicObject atomicObject)) return false;
             
-            return atomicObject.Is(ObjectTypes.Damageable) && atomicObject.Is(ObjectTypes.Zombie);
+            return atomicObject.Is(TypeAPI.Damageable) && atomicObject.Is(TypeAPI.Zombie);
         }
     }
 }

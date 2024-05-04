@@ -21,14 +21,12 @@ namespace Objects
         private AudioClip _deathClip;
         
         [SerializeField]
-        private AudioClip _attackClip;
-        
-        [SerializeField]
         private AudioClip _moveClip;
         
         private readonly AtomicEvent _moveClipPlayEvent = new();
         private readonly AtomicEvent _moveClipStopEvent = new();
-        
+
+        private AttackSoundController _attackSoundController;
         private TakeDamageSoundController _takeDamageSoundController;
         private DeathSoundController _deathSoundController;
         
@@ -36,20 +34,13 @@ namespace Objects
         
         public void Compose(Character_Core core)
         {
-            IAtomicObservable<int> takeDamageObservable = core.TakeDamageEvent;
-            IAtomicObservable deathObservable = core.DeathObservable;
-            IAtomicObservable shootObservable = core.ShootObservable;
-            IAtomicValue<bool> takeDamageClipCondition = core.AliveCondition;
-            IAtomicValue<bool> moveCondition = core.MoveCondition;
-            
             AtomicValue<float> moveClipDuration = new(_moveClip.length);
-
-            shootObservable.Subscribe(() => _audioSource.PlayOneShot(_attackClip));
             
-            _takeDamageSoundController = new TakeDamageSoundController(takeDamageObservable, takeDamageClipCondition, _audioSource, _takeDamageClip);
-            _deathSoundController = new DeathSoundController(deathObservable, _audioSource, _deathClip);
+            _attackSoundController = new AttackSoundController(_audioSource, core.CurrentGun, core.AttackObservable);
+            _takeDamageSoundController = new TakeDamageSoundController(core.TakeDamageEvent, core.AliveCondition, _audioSource, _takeDamageClip);
+            _deathSoundController = new DeathSoundController(core.DeathObservable, _audioSource, _deathClip);
 
-            _moveTimeSoundController = new MoveTimeController(moveCondition, moveClipDuration, _moveClipPlayEvent, _moveClipStopEvent);
+            _moveTimeSoundController = new MoveTimeController(core.MoveCondition, moveClipDuration, _moveClipPlayEvent, _moveClipStopEvent);
             _moveAudioSource.clip = _moveClip;
             _moveClipPlayEvent.Subscribe(() => _moveAudioSource.Play());
             _moveClipStopEvent.Subscribe(() => _moveAudioSource.Stop());
@@ -57,6 +48,7 @@ namespace Objects
         
         public void OnEnable()
         {
+            _attackSoundController.OnEnable();
             _takeDamageSoundController.OnEnable();
             _deathSoundController.OnEnable();
         }
@@ -68,6 +60,7 @@ namespace Objects
         
         public void OnDisable()
         {
+            _attackSoundController.OnDisable();
             _takeDamageSoundController.OnDisable();
             _deathSoundController.OnDisable();
         }

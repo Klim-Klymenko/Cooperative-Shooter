@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Objects
 {
-    [Is(ObjectTypes.Zombie, ObjectTypes.Damageable, ObjectTypes.Attacker, ObjectTypes.NavMeshAgent)]
+    [Is(TypeAPI.Zombie, TypeAPI.Damageable, TypeAPI.Attacker, TypeAPI.NavMeshAgent)]
     internal sealed class Zombie : AtomicObject, IUpdateGameListener, IFinishGameListener
     {
         [Get(LiveableAPI.HitPoints)] 

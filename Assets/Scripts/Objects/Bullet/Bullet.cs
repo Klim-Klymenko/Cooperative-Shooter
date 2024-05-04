@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Objects
 {
-    [Is(ObjectTypes.Movable)]
+    [Is(TypeAPI.Movable)]
     internal sealed class Bullet : AtomicObject, IDisposable, IUpdateGameListener, IFinishGameListener
     {
         [Get(MovableAPI.MovementDirection)]

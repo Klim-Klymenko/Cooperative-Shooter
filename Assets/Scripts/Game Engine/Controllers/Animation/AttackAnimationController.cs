@@ -7,13 +7,13 @@ namespace GameEngine
     {
         private static readonly int _attackTrigger = Animator.StringToHash("Attack");
         
-        private readonly IAtomicObservable _attackObservable;
         private readonly Animator _animator;
+        private readonly IAtomicObservable _attackObservable;
 
-        public AttackAnimationController(IAtomicObservable attackObservable, Animator animator)
+        public AttackAnimationController(Animator animator, IAtomicObservable attackObservable)
         {
-            _attackObservable = attackObservable;
             _animator = animator;
+            _attackObservable = attackObservable;
         }
         
         public void OnEnable()

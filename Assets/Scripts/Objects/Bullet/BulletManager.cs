@@ -46,7 +46,7 @@ namespace Objects
             
             return bulletTransform;
         }
-
+        
         public void Despawn(Transform obj)
         {
             Bullet bullet = obj.GetComponent<Bullet>();
