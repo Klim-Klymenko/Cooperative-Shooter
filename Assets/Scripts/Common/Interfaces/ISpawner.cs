@@ -4,7 +4,7 @@ namespace Common
 {
     public interface ISpawner<T> where T : Object
     {
-        T Spawn();
+        T Spawn(string objectType);
         void Despawn(T obj);
     }
 }

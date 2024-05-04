@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 1336756717607730547}
+  _bulletType: 1
   _moveComponent:
     _moveSpeed:
       value: 25

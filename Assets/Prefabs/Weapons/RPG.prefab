@@ -112,9 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackClip: {fileID: 8300000, guid: f708d2863fe70714e83d72883dff2b3f, type: 3}
   _attackParticle: {fileID: 5982892340649170735}
-  _weaponType: 1
   _shootComponent:
-    _firePoint: {fileID: 7799673178723864104}
+    _bulletType: 1
     _charges:
       value: 1
     _shootingInterval:

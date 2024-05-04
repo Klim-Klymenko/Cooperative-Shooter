@@ -9,5 +9,7 @@
         public const string Character = nameof(Character);
         public const string Zombie = nameof(Zombie);
         public const string Attacker = nameof(Attacker);
+        public const string AssaultRifleBullet = nameof(AssaultRifleBullet);
+        public const string RpgBullet = nameof(RpgBullet);
     }
 }

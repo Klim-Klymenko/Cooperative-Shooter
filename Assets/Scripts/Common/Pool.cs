@@ -15,7 +15,9 @@ namespace Common
         private readonly Quaternion _spawnRotation;
         private readonly Transform _parent;
         
-        public Pool(int reservationAmount, T prefab, Transform parent)
+        public readonly string ObjectType;
+        
+        public Pool(int reservationAmount, T prefab, Transform parent, string objectType = null)
         {
             _objects = new List<T>(reservationAmount);
             
@@ -24,6 +26,7 @@ namespace Common
             _spawnPosition = Vector3.zero;
             _spawnRotation = Quaternion.identity;
             _parent = parent;
+            ObjectType = objectType;
             
             Reserve();
         }

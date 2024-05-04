@@ -4,7 +4,6 @@ using Atomic.Objects;
 using Common;
 using GameCycle;
 using GameEngine;
-using GameEngine.Data;
 using UnityEngine;
 using Zenject;
 
@@ -28,9 +27,6 @@ namespace Objects
         [Get(ParticleAPI.AttackParticle)] 
         [SerializeField]
         private ParticleSystem _attackParticle;
-        
-        [SerializeField]
-        private WeaponType _weaponType;
         
         [SerializeField] 
         private ShootComponent _shootComponent;
@@ -71,8 +67,6 @@ namespace Objects
             
             _replenishComponent.OnEnable();
             _shootComponent.OnEnable();
-            
-            AddType(_weaponType.ToString());
         }
 
         void IInitializeGameListener.OnInitialize()

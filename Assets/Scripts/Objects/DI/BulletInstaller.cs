@@ -1,4 +1,5 @@
 ﻿using Common;
+using GameEngine.Data;
 using UnityEngine;
 using Zenject;
 
@@ -10,28 +11,36 @@ namespace Objects
         private int _reservationAmount;
         
         [SerializeField]
-        private Bullet _prefab;
+        private Bullet[] _prefabs;
         
         [SerializeField]
         private Transform _poolContainer;
+
+        [SerializeField] 
+        private BulletType[] _bulletTypes;
         
         [SerializeField]
-        private Transform _firePoint;
+        private Transform[] _firePoints;
         
         public override void InstallBindings()
         {
-            BindPool();
-            BindSpawner();
+            BindBulletManager();
         }
         
-        private void BindPool()
+        private void BindBulletManager()
         {
-            Container.Bind<Pool<Bullet>>().AsSingle().WithArguments(_reservationAmount, _prefab, _poolContainer);
+            Pool<Bullet>[] pools = CreatePools();
+            
+            Container.BindInterfacesTo<BulletManager>().AsSingle().WithArguments(pools, _firePoints);
         }
-        
-        private void BindSpawner()
+
+        private Pool<Bullet>[] CreatePools()
         {
-            Container.BindInterfacesTo<BulletManager>().AsSingle().WithArguments(_firePoint);
+            return new Pool<Bullet>[]
+            {
+                new Pool<Bullet>(_reservationAmount, _prefabs[0], _poolContainer, _bulletTypes[0].ToString()),
+                new Pool<Bullet>(_reservationAmount, _prefabs[1], _poolContainer, _bulletTypes[1].ToString())
+            };
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Objects
             _deathClipLength = deathClipLength;
         }
 
-        public Zombie Spawn()
+        public Zombie Spawn(string _)
         {
             Zombie zombie = _pool.Get();
             

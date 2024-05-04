@@ -1,6 +1,7 @@
 ﻿using System;
 using Atomic.Elements;
 using Common;
+using GameEngine.Data;
 using UnityEngine;
 
 namespace GameEngine
@@ -8,9 +9,9 @@ namespace GameEngine
     [Serializable]
     public sealed class ShootComponent : IDisposable
     {
-        [SerializeField] 
-        private Transform _firePoint;
-
+        [SerializeField]
+        private BulletType _bulletType;
+        
         [SerializeField] 
         private AtomicVariable<int> _charges;
 
@@ -41,7 +42,7 @@ namespace GameEngine
             _shootCondition.Append(new AtomicFunction<bool>(() => _charges.Value > 0));
             
             _triggerShootAction.Compose(() => { if (_shootCondition.Invoke()) _shootRequestEvent.Invoke(); });
-            _bulletSpawnAction.Compose(() => bulletSpawner.Spawn());
+            _bulletSpawnAction.Compose(() => bulletSpawner.Spawn(_bulletType.ToString()));
             
             _shootMechanics = new ShootMechanics(_charges, _bulletSpawnAction, _shootEvent);
         }

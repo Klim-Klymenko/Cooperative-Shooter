@@ -480,11 +480,9 @@ MonoBehaviour:
     _moveAudioSource: {fileID: 72327594}
     _takeDamageClip: {fileID: 8300000, guid: 356001d1487a2c7498a9b3aedc8550e2, type: 3}
     _deathClip: {fileID: 8300000, guid: 1a54c930d948d0c4d8cddf2fc6939826, type: 3}
-    _attackClip: {fileID: 8300000, guid: 9e66438152e27fa45a81833a3afd7d43, type: 3}
     _moveClip: {fileID: 8300000, guid: 8b538abbfbed3fd43ba25a4c09e30ddc, type: 3}
   _particle:
     _damageParticle: {fileID: 7160757875473398899}
-    _attackParticle: {fileID: 0}
     _moveParticle: {fileID: 1956438815333898656}
 --- !u!1001 &406840918396493479
 PrefabInstance:
@@ -500,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177376977147711271, guid: 1d753bf52e093e2489a6646a04e933bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6451708374713194203, guid: 1d753bf52e093e2489a6646a04e933bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -681,7 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232525191824777272, guid: b81524ba881b1354fa82c06a589ab056, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

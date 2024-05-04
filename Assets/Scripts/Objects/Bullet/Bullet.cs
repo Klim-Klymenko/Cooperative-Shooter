@@ -4,6 +4,7 @@ using Atomic.Extensions;
 using Atomic.Objects;
 using GameCycle;
 using GameEngine;
+using GameEngine.Data;
 using UnityEngine;
 
 namespace Objects
@@ -19,6 +20,9 @@ namespace Objects
         
         [SerializeField]
         private Transform _transform;
+
+        [SerializeField]
+        private BulletType _bulletType;
         
         [SerializeField]
         private MoveComponent _moveComponent;
@@ -62,6 +66,8 @@ namespace Objects
 
             _aliveCondition.Value = true;
             _composed = true;
+
+            AddType(_bulletType.ToString());
         }
 
         void IUpdateGameListener.OnUpdate()

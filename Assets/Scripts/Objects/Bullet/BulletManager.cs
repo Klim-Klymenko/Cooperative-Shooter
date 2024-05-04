@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atomic.Elements;
 using Atomic.Extensions;
 using Common;
@@ -14,24 +15,28 @@ namespace Objects
     {
         private readonly List<Bullet> _activeBullets = new();
         
-        private readonly Pool<Bullet> _pool;
+        private readonly Pool<Bullet>[] _pools;
+        private readonly Transform[] _firePoints;
         private readonly GameCycleManager _gameCycleManager;
-        private readonly Transform _firePoint;
-        
-        internal BulletManager(Pool<Bullet> pool, GameCycleManager gameCycleManager, Transform firePoint)
+
+        internal BulletManager(Pool<Bullet>[] pools, Transform[] firePoints, GameCycleManager gameCycleManager)
         {
-            _pool = pool;
+            _pools = pools;
+            _firePoints = firePoints;
             _gameCycleManager = gameCycleManager;
-            _firePoint = firePoint;
         }
 
-        Transform ISpawner<Transform>.Spawn()
+        Transform ISpawner<Transform>.Spawn(string objectType)
         {
-            Bullet bullet = _pool.Get();
+            int index = FindPoolIndex(objectType);
+            
+            Bullet bullet = _pools[index].Get();
             Transform bulletTransform = bullet.transform;
 
-            bulletTransform.position = _firePoint.position;
-            bulletTransform.forward = _firePoint.forward;
+            Transform firePoint = _firePoints[index];
+            
+            bulletTransform.position = firePoint.position;
+            bulletTransform.forward = firePoint.forward;
             
             bullet.Compose();
 
@@ -55,9 +60,25 @@ namespace Objects
             _gameCycleManager.RemoveListener(bullet);
 
             _activeBullets.Remove(bullet);
-            _pool.Put(bullet);
+
+            int index = FindPoolIndex(bullet.Types());
+            _pools[index].Put(bullet);
         }
 
+        private int FindPoolIndex(params string[] objectTypes)
+        {
+            for (int i = 0; i < objectTypes.Length; i++)
+            {
+                for (int j = 0; j < _pools.Length; j++)
+                {
+                    if (objectTypes[i] == _pools[j].ObjectType)
+                        return j;
+                }
+            }
+            
+            throw new Exception("Pool not found");
+        }
+        
         void IFinishGameListener.OnFinish()
         {
             for (int i = 0; i < _activeBullets.Count; i++)
