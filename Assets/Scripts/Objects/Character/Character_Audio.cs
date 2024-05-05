@@ -36,7 +36,7 @@ namespace Objects
         {
             AtomicValue<float> moveClipDuration = new(_moveClip.length);
             
-            _attackSoundController = new AttackSoundController(_audioSource, core.CurrentGun, core.AttackObservable);
+            _attackSoundController = new AttackSoundController(_audioSource, core.CurrentWeapon, core.AttackObservable);
             _takeDamageSoundController = new TakeDamageSoundController(core.TakeDamageEvent, core.AliveCondition, _audioSource, _takeDamageClip);
             _deathSoundController = new DeathSoundController(core.DeathObservable, _audioSource, _deathClip);
 

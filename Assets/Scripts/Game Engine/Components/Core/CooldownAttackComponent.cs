@@ -42,9 +42,9 @@ namespace GameEngine
             _targetTransform = targetTransform;
             
             _isInAttackRange.Compose(_attackRange, _targetTransform, transform);
-            
-            _attackCondition.Append(new AtomicFunction<bool>(() => _targetTransform.Value != null));
+
             _attackCondition.Append(_isInAttackRange);
+            _attackCondition.Append(new AtomicFunction<bool>(() => _targetTransform.Value != null));
 
             _attackEvent.Subscribe(_ => _attackEventNonArgs?.Invoke());
 

@@ -21,7 +21,7 @@ namespace GameEngine
         private readonly AtomicEvent _shootRequestEvent = new();
         private readonly AtomicEvent _shootEvent = new();
         
-        private readonly AtomicAction _triggerShootAction = new();
+        private readonly AtomicAction _shootRequestAction = new();
         private readonly AtomicAction _bulletSpawnAction = new();
         
         private readonly AndExpression _shootCondition = new();
@@ -29,7 +29,7 @@ namespace GameEngine
         private ShootMechanics _shootMechanics;
         
         public IAtomicValue<float> ShootingInterval => _shootingInterval;
-        public IAtomicAction ShootRequestAction => _triggerShootAction;
+        public IAtomicAction ShootRequestAction => _shootRequestAction;
         public IAtomicAction ShootAction => _shootEvent;
         
         public IAtomicVariable<int> Charges => _charges;
@@ -41,7 +41,7 @@ namespace GameEngine
         {
             _shootCondition.Append(new AtomicFunction<bool>(() => _charges.Value > 0));
             
-            _triggerShootAction.Compose(() => { if (_shootCondition.Invoke()) _shootRequestEvent.Invoke(); });
+            _shootRequestAction.Compose(() => { if (_shootCondition.Invoke()) _shootRequestEvent.Invoke(); });
             _bulletSpawnAction.Compose(() => bulletSpawner.Spawn(_bulletType.ToString()));
             
             _shootMechanics = new ShootMechanics(_charges, _bulletSpawnAction, _shootEvent);

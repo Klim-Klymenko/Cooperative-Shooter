@@ -9,21 +9,17 @@ using Zenject;
 
 namespace Objects
 {
-    public sealed class Weapon : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
+    public sealed class FireArms : AtomicWeapon, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
         [Get(WeaponAPI.AttackInterval)]
-        private IAtomicValue<float> ShootingInterval => _shootComponent.ShootingInterval;
+        protected override IAtomicValue<float> AttackInterval => _shootComponent.ShootingInterval;
         
         [Get(WeaponAPI.AttackRequestAction)]
-        private IAtomicAction ShootRequestAction => _shootComponent.ShootRequestAction;
+        protected override IAtomicAction AttackRequestAction => _shootComponent.ShootRequestAction;
         
         [Get(WeaponAPI.AttackAction)]
-        private IAtomicAction ShootAction => _shootComponent.ShootAction;
+        private IAtomicAction AttackAction => _shootComponent.ShootAction;
         
-        [Get(SoundAPI.AttackClip)]
-        [SerializeField]
-        private AudioClip _attackClip;
-
         [Get(ParticleAPI.AttackParticle)] 
         [SerializeField]
         private ParticleSystem _attackParticle;
@@ -36,8 +32,8 @@ namespace Objects
         
         private readonly AndExpression _aliveCondition = new();
         
-        internal IAtomicObservable ShootRequestObservable => _shootComponent.ShootRequestObservable;
-        internal IAtomicObservable ShootObservable => _shootComponent.ShootObservable;
+        internal override IAtomicObservable AttackRequestObservable => _shootComponent.ShootRequestObservable;
+        internal override IAtomicObservable AttackObservable => _shootComponent.ShootObservable;
         
         private ISpawner<Transform> _bulletSpawner;
         

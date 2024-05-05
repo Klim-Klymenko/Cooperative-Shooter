@@ -57,9 +57,9 @@ namespace Common.LocalInput
 
         #region Actions
 
-        public bool ShootingStartButton => IsM0Down;
-        public bool ShootingContinueButton => IsM0;
-        public bool ShootingStopButton => IsM0Up;
+        public bool AttackStartButton => IsM0Down;
+        public bool AttackContinueButton => IsM0;
+        public bool AttackStopButton => IsM0Up;
         
         public bool SwitchingSlot1Button => IsAlpha1Down;
         public bool SwitchingSlot2Button => IsAlpha2Down;

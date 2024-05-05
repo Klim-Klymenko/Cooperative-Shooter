@@ -29,10 +29,8 @@ namespace GameEngine
         
         private void OnAttack(IAtomicObject target)
         {
-            if (!_attackCondition.Value) return;
-            
-            IAtomicAction<int> takeDamageAction = target.GetAction<int>(LiveableAPI.TakeDamageAction);
-            takeDamageAction?.Invoke(_damage.Value);
+            if (_attackCondition.Value) 
+                target.InvokeAction(LiveableAPI.TakeDamageAction, _damage.Value);
         }
     }
 }

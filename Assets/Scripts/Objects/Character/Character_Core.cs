@@ -35,9 +35,9 @@ namespace Objects
         internal IAtomicVariable<Vector3> MovementDirection => _moveComponent.MovementDirection;
         internal IAtomicValue<bool> MoveCondition => _moveComponent.MoveCondition;
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
-        internal IAtomicVariable<int> CurrentGunIndex => _switchingItemComponent.CurrentItemIndex;
-        internal IAtomicObservable<int> SwitchingGunObservable => _switchingItemComponent.SwitchingItemObservable;
-        internal IAtomicValue<IAtomicObject> CurrentGun => _switchingItemComponent.CurrentItem;
+        internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
+        internal IAtomicObservable<int> SwitchingWeaponObservable => _switchingItemComponent.SwitchingItemObservable;
+        internal IAtomicValue<IAtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;

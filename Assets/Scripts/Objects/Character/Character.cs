@@ -28,13 +28,13 @@ namespace Objects
         private IAtomicVariable<Vector3> RotationDirection => _core.RotationDirection;
         
         [Get(WeaponAPI.CurrentWeaponIndex)]
-        private IAtomicVariable<int> CurrentGunIndex => _core.CurrentGunIndex;
+        private IAtomicVariable<int> CurrentWeaponIndex => _core.CurrentWeaponIndex;
         
         [Get(WeaponAPI.SwitchingWeaponObservable)]
-        private IAtomicObservable<int> SwitchingGunObservable => _core.SwitchingGunObservable;
+        private IAtomicObservable<int> SwitchingWeaponObservable => _core.SwitchingWeaponObservable;
         
         [Get(WeaponAPI.CurrentWeapon)]
-        private IAtomicValue<IAtomicObject> CurrentGun => _core.CurrentGun;
+        private IAtomicValue<IAtomicObject> CurrentWeapon => _core.CurrentWeapon;
         
         [SerializeField]
         private Character_Core _core;

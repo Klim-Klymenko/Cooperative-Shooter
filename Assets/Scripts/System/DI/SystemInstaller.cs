@@ -28,9 +28,9 @@ namespace System
         private void BindInputControllers()
         {
             Container.BindInterfacesTo<MovementInputController>().AsSingle().WithArguments(_character);
-            Container.BindInterfacesTo<ShootingInputController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesTo<AttackInputController>().AsSingle().WithArguments(_character);
             Container.BindInterfacesTo<RotationInputController>().AsSingle().WithArguments(_camera, _character.transform, _character);
-            Container.BindInterfacesTo<SwitchingGunController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesTo<SwitchingWeaponController>().AsSingle().WithArguments(_character);
         }
         
         private void BindFinishGameController()

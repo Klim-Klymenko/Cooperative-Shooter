@@ -22,7 +22,7 @@ namespace GameEngine
         [HideInInspector]
         private AtomicFunction<Vector3> _targetPosition;
         
-        private SwitchNavMeshAgentMechanics _switchNavMeshAgentMechanics;
+        private SwitchComponentMechanics<NavMeshAgent> _switchComponentMechanics;
         private AgentFollowMechanics _agentFollowMechanics;
         
         public IAtomicExpression<bool> MoveCondition => _moveCondition;
@@ -40,13 +40,13 @@ namespace GameEngine
             
             _targetPosition.Compose(() => _targetTransform.Value == null ? Vector3.zero : _targetTransform.Value.position);
             
-            _switchNavMeshAgentMechanics = new SwitchNavMeshAgentMechanics(_agent);
+            _switchComponentMechanics = new SwitchComponentMechanics<NavMeshAgent>(_agent);
             _agentFollowMechanics = new AgentFollowMechanics(_targetPosition, _followCondition, _agent);
         }
 
         public void OnEnable()
         {
-            _switchNavMeshAgentMechanics.OnEnable();
+            _switchComponentMechanics.OnEnable();
         }
         
         public void Update()
@@ -56,7 +56,7 @@ namespace GameEngine
 
         public void OnDisable()
         {
-            _switchNavMeshAgentMechanics.OnDisable();
+            _switchComponentMechanics.OnDisable();
         }
     }
 }

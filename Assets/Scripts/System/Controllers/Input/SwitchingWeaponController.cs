@@ -9,34 +9,34 @@ using JetBrains.Annotations;
 namespace System
 {
     [UsedImplicitly]
-    internal sealed class SwitchingGunController : IStartGameListener, IUpdateGameListener
+    internal sealed class SwitchingWeaponController : IStartGameListener, IUpdateGameListener
     {
-        private IAtomicVariable<int> _currentGunIndex;
+        private IAtomicVariable<int> _currentWeaponIndex;
 
         private readonly InputFacade _input;
-        private readonly IAtomicObject _shooter;
+        private readonly IAtomicObject _attacker;
 
-        internal SwitchingGunController(InputFacade input, IAtomicObject shooter)
+        internal SwitchingWeaponController(InputFacade input, IAtomicObject attacker)
         {
             _input = input;
-            _shooter = shooter;
+            _attacker = attacker;
         }
 
         void IStartGameListener.OnStart()
         {
-            _currentGunIndex = _shooter.GetVariable<int>(WeaponAPI.CurrentWeaponIndex);
+            _currentWeaponIndex = _attacker.GetVariable<int>(WeaponAPI.CurrentWeaponIndex);
         }
         
         void IUpdateGameListener.OnUpdate()
         {
             if (_input.SwitchingSlot1Button)
-                _currentGunIndex.Value = 0;
+                _currentWeaponIndex.Value = 0;
             
             else if (_input.SwitchingSlot2Button)
-                _currentGunIndex.Value = 1;
+                _currentWeaponIndex.Value = 1;
             
             else if (_input.SwitchingSlot3Button)
-                _currentGunIndex.Value = 2;
+                _currentWeaponIndex.Value = 2;
         }
     }
 }

@@ -6,11 +6,11 @@ using UnityEngine;
 namespace GameEngine
 {
     [Serializable]
-    public sealed class BulletTakeDamageCondition : IAtomicFunction<Collision, bool>
+    public sealed class ZombieTakeDamageCondition : IAtomicFunction<Component, bool>
     {
-        public bool Invoke(Collision collision)
+        public bool Invoke(Component other)
         {
-            if (!collision.gameObject.TryGetComponent(out AtomicObject atomicObject)) return false;
+            if (!other.gameObject.TryGetComponent(out AtomicObject atomicObject)) return false;
             
             return atomicObject.Is(TypeAPI.Damageable) && atomicObject.Is(TypeAPI.Zombie);
         }

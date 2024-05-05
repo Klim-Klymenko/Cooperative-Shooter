@@ -6,6 +6,7 @@ using GameCycle;
 using GameEngine;
 using GameEngine.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Objects
 {
@@ -26,20 +27,15 @@ namespace Objects
         
         [SerializeField]
         private MoveComponent _moveComponent;
-
-        [SerializeField]
-        private AttackComponent _attackComponent;
         
-        private readonly AtomicEvent<AtomicObject> _attackEvent = new();
+        [SerializeField]
+        private CollisionAttackComponent _collisionAttackComponent;
         
         [Get(LiveableAPI.DeathObservable)]
         private readonly AtomicEvent _deathEvent = new();
         
         private readonly AtomicVariable<bool> _aliveCondition = new();
-        private readonly BulletTakeDamageCondition _bulletTakeDamageCondition = new();
         
-        private PassOnTargetMechanics _passOnTargetMechanics;
-
         private bool _composed;
         
         public override void Compose()
@@ -54,15 +50,13 @@ namespace Objects
                it.MoveCondition.Append(_aliveCondition);
            });
 
-           _attackComponent.Let(it =>
+           _collisionAttackComponent.Let(it =>
            {
-               it.Compose(_attackEvent);
+               it.Compose();
                it.AttackCondition.Append(_aliveCondition);
            });
            
-            _passOnTargetMechanics = new PassOnTargetMechanics(_bulletTakeDamageCondition, _attackEvent);
-
-            _attackComponent.OnEnable();
+           _collisionAttackComponent.OnEnable();
 
             _aliveCondition.Value = true;
             _composed = true;
@@ -77,11 +71,12 @@ namespace Objects
             _moveComponent.Update();
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (!_composed) return;
             
-           _passOnTargetMechanics.OnCollisionEnter(other);
+           _collisionAttackComponent.OnTriggerEnter(other);
+           
            _deathEvent?.Invoke();
            _aliveCondition.Value = false;
         }
@@ -90,14 +85,16 @@ namespace Objects
         {
             if (!_composed) return;
             
-            _attackComponent.OnDisable();
+            _collisionAttackComponent.OnDisable();
+            
             Dispose();
         }
 
         public void Dispose()
         {
-            _attackEvent?.Dispose();
             _deathEvent?.Dispose();
+            _moveComponent?.Dispose();
+            _collisionAttackComponent.Dispose();
         }
     }
 }

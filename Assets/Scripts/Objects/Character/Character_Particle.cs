@@ -25,7 +25,7 @@ namespace Objects
         {
             AtomicValue<float> moveParticleDuration = new(_moveParticle.main.duration);
 
-            _attackParticleController = new AttackParticleController(core.CurrentGun, core.AttackObservable);
+            _attackParticleController = new AttackParticleController(core.CurrentWeapon, core.AttackObservable);
             
             core.TakeDamageEvent.Subscribe(_ => _damageParticle.Play(withChildren: true));
             

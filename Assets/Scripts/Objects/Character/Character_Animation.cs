@@ -1,5 +1,4 @@
 ﻿using System;
-using Atomic.Elements;
 using GameEngine;
 using UnityEngine;
 
@@ -20,8 +19,8 @@ namespace Objects
         {
             _takeDamageAnimationController = new TakeDamageAnimationController(_animator, core.TakeDamageEvent);
             _deathAnimationController = new DeathAnimationController(_animator, core.DeathObservable);
-            _moveAnimationController = new MoveAnimationController(_animator, core.MoveCondition, core.CurrentGunIndex);
-            _attackAnimationController = new AttackAnimationController(_animator, core.AttackRequestObservable);
+            _moveAnimationController = new MoveAnimationController(_animator, core.MoveCondition, core.CurrentWeaponIndex);
+            _attackAnimationController = new AttackAnimationController(_animator, core.AttackRequestObservable, core.CurrentWeaponIndex);
         }
         
         internal void OnEnable()
