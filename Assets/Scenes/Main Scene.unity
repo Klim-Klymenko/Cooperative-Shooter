@@ -2194,7 +2194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2387213875283743102, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
       propertyPath: _shootComponent._shootingInterval.value
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
       propertyPath: _core._weaponComponent._weapons.Array.data[0]
