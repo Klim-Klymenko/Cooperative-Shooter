@@ -5,8 +5,8 @@ namespace GameEngine
 {
     public static class LiveableAPI
     {
-        [Contract(typeof(IAtomicObservable<int>))]
-        public const string HitPointsObservable = nameof(HitPointsObservable);
+        [Contract(typeof(IAtomicVariableObservable<int>))]
+        public const string HitPoints = nameof(HitPoints);
         
         [Contract(typeof(IAtomicAction<int>))]
         public const string TakeDamageAction = nameof(TakeDamageAction);

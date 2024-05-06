@@ -29,15 +29,14 @@ namespace Objects
         [SerializeField]
         private SwitchingItemComponent _switchingItemComponent;
         
-        internal IAtomicObservable<int> HitPointsObservable => _healthComponent.HitPointsObservable;
+        internal IAtomicVariableObservable<int> HitPoints => _healthComponent.HitPoints;
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
         internal IAtomicVariable<Vector3> MovementDirection => _moveComponent.MovementDirection;
         internal IAtomicValue<bool> MoveCondition => _moveComponent.MoveCondition;
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
         internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
-        internal IAtomicObservable<int> SwitchingWeaponObservable => _switchingItemComponent.SwitchingItemObservable;
-        internal IAtomicValue<IAtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
+        internal IAtomicValueObservable<AtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;

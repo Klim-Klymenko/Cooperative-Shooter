@@ -18,8 +18,7 @@ namespace GameEngine
         private AssignCurrentItemMechanics _assignCurrentItemMechanics;
 
         public IAtomicVariable<int> CurrentItemIndex => _currentItemIndex;
-        public IAtomicObservable<int> SwitchingItemObservable => _currentItemIndex;
-        public IAtomicValue<IAtomicObject> CurrentItem => _currentItem;
+        public IAtomicValueObservable<AtomicObject> CurrentItem => _currentItem;
         
         public void Compose(AtomicObject[] items)
         {

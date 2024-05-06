@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackClip: {fileID: 8300000, guid: b344f7c4bb247864ea931946329e9b92, type: 3}
+  _weaponSprite: {fileID: 21300000, guid: 9377b56505148314ab0e9f9bce086329, type: 3}
   _attackParticle: {fileID: 4442856746095248272}
-  _weaponType: 1
   _shootComponent:
-    _firePoint: {fileID: 4486799535662593200}
+    _bulletType: 0
     _charges:
       value: 30
     _shootingInterval:

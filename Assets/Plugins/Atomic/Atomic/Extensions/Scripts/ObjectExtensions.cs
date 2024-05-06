@@ -19,6 +19,18 @@ namespace Atomic.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicValueObservable<T> GetValueObservable<T>(this IAtomicObject it, string name)
+        {
+            return it.Get<IAtomicValueObservable<T>>(name);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetValueObservable<T>(this IAtomicObject it, string name, out IAtomicValueObservable<T> result)
+        {
+            return it.TryGet(name, out result) && result != null;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IAtomicVariable<T> GetVariable<T>(this IAtomicObject it, string name)
         {
             return it.Get<IAtomicVariable<T>>(name);
@@ -30,6 +42,18 @@ namespace Atomic.Extensions
             return it.TryGet(name, out result) && result != null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicVariableObservable<T> GetVariableObservable<T>(this IAtomicObject it, string name)
+        {
+            return it.Get<IAtomicVariableObservable<T>>(name);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetVariableObservable<T>(this IAtomicObject it, string name, out IAtomicVariableObservable<T> result)
+        {
+            return it.TryGet(name, out result) && result != null;
+        }
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IAtomicFunction<T> GetFunction<T>(this IAtomicObject it, string name)
         {

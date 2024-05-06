@@ -1,6 +1,7 @@
 ﻿using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
+using UnityEngine;
 
 namespace GameEngine
 {
@@ -18,10 +19,13 @@ namespace GameEngine
         [Contract(typeof(IAtomicVariable<int>))]
         public const string CurrentWeaponIndex = nameof(CurrentWeaponIndex);
         
-        [Contract(typeof(IAtomicObservable<int>))]
-        public const string SwitchingWeaponObservable = nameof(SwitchingWeaponObservable);
-        
-        [Contract(typeof(IAtomicValue<IAtomicObject>))]
+        [Contract(typeof(IAtomicValueObservable<AtomicObject>))]
         public const string CurrentWeapon = nameof(CurrentWeapon);
+
+        [Contract(typeof(IAtomicVariableObservable<int>))]
+        public const string Charges = nameof(Charges);
+        
+        [Contract(typeof(Sprite))]
+        public const string WeaponSprite = nameof(WeaponSprite);
     }
 }

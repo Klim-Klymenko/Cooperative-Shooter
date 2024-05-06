@@ -31,8 +31,8 @@ namespace GameEngine
         public IAtomicValue<float> ShootingInterval => _shootingInterval;
         public IAtomicAction ShootRequestAction => _shootRequestAction;
         public IAtomicAction ShootAction => _shootEvent;
-        
-        public IAtomicVariable<int> Charges => _charges;
+        public IAtomicVariableObservable<int> Charges => _charges;
+
         public IAtomicObservable ShootRequestObservable => _shootRequestEvent;
         public IAtomicObservable ShootObservable => _shootEvent;
         public IAtomicExpression<bool> ShootCondition => _shootCondition;

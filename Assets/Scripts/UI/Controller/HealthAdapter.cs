@@ -11,7 +11,7 @@ namespace UI.Controller
     [UsedImplicitly]
     internal sealed class HealthAdapter : IStartGameListener, IFinishGameListener
     {
-        private IAtomicObservable<int> _hitPointsObservable;
+        private IAtomicVariableObservable<int> _hitPoints;
         
         private readonly BarView _healthView;
         private readonly IAtomicObject _character;
@@ -24,13 +24,14 @@ namespace UI.Controller
 
         void IStartGameListener.OnStart()
         {
-            _hitPointsObservable = _character.GetObservable<int>(LiveableAPI.HitPointsObservable);
-            _hitPointsObservable.Subscribe(ChangeHealth);
+            _hitPoints = _character.GetVariableObservable<int>(LiveableAPI.HitPoints);
+            _hitPoints.Subscribe(ChangeHealth);
+            ChangeHealth(_hitPoints.Value);
         }
 
         void IFinishGameListener.OnFinish()
         {
-            _hitPointsObservable.Unsubscribe(ChangeHealth);
+            _hitPoints.Unsubscribe(ChangeHealth);
         }
 
         private void ChangeHealth(int health)

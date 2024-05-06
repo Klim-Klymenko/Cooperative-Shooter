@@ -1,30 +1,28 @@
 ﻿using GameCycle;
+using JetBrains.Annotations;
 using UI.Factories;
 using UI.View;
-using UnityEngine;
-using Zenject;
 
 namespace UI.Managers
 {
-    internal sealed class BarManager : MonoBehaviour, IStartGameListener
+    [UsedImplicitly]
+    internal sealed class BarManager : IStartGameListener
     {
         //TODO: Add Armor UI Logic and assign array
         
-        /*private Common.IFactory<BarView>[] _barViewFactories;
-        private IBarAdapterFactory[] _barAdapterFactories;*/
+        /*private readonly Common.IFactory<BarView>[] _barViewFactories;
+        private readonly IBarAdapterFactory[] _barAdapterFactories;*/
         
-        private Common.IFactory<BarView> _barViewFactory;
-        private IBarAdapterFactory _barAdapterFactory;
+        private readonly Common.IFactory<BarView> _barViewFactory;
+        private readonly IBarAdapterFactory _barAdapterFactory;
         
-        /*[Inject]
-        internal void Construct(Common.IFactory<BarView>[] barViewFactories, IBarAdapterFactory[] barAdapterFactories)
+        /*internal BarManager(Common.IFactory<BarView>[] barViewFactories, IBarAdapterFactory[] barAdapterFactories)
         {
             _barViewFactories = barViewFactories;
             _barAdapterFactories = barAdapterFactories;
         }*/
         
-        [Inject]
-        internal void Construct(Common.IFactory<BarView> barViewFactory, IBarAdapterFactory barAdapterFactory)
+        internal BarManager(Common.IFactory<BarView> barViewFactory, IBarAdapterFactory barAdapterFactory)
         {
             _barViewFactory = barViewFactory;
             _barAdapterFactory = barAdapterFactory;

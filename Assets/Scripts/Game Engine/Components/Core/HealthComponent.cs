@@ -22,7 +22,7 @@ namespace GameEngine
         private TakeDamageMechanics _takeDamageMechanics;
         private DeathMechanics _deathMechanics;
         
-        public IAtomicObservable<int> HitPointsObservable => _currentHitPoints;
+        public IAtomicVariableObservable<int> HitPoints => _currentHitPoints;
         public IAtomicEvent<int> TakeDamageEvent => _takeDamageEvent;
         public IAtomicObservable DeathObservable => _deathEvent;
         

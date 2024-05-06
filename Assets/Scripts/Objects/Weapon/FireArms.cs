@@ -20,6 +20,9 @@ namespace Objects
         [Get(WeaponAPI.AttackAction)]
         private IAtomicAction AttackAction => _shootComponent.ShootAction;
         
+        [Get(WeaponAPI.Charges)]
+        private IAtomicValueObservable<int> Charges => _shootComponent.Charges;
+        
         [Get(ParticleAPI.AttackParticle)] 
         [SerializeField]
         private ParticleSystem _attackParticle;

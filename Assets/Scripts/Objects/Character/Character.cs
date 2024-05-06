@@ -9,8 +9,8 @@ namespace Objects
     [Is(TypeAPI.Character, TypeAPI.Damageable, TypeAPI.Movable, TypeAPI.Striker, TypeAPI.Attacker)]
     internal sealed class Character : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
-        [Get(LiveableAPI.HitPointsObservable)]
-        private IAtomicObservable<int> HitPointsObservable => _core.HitPointsObservable;
+        [Get(LiveableAPI.HitPoints)]
+        private IAtomicValueObservable<int> HitPoints => _core.HitPoints;
         
         [Get(LiveableAPI.TakeDamageAction)]
         private IAtomicAction<int> TakeDamageAction => _core.TakeDamageEvent;
@@ -30,11 +30,8 @@ namespace Objects
         [Get(WeaponAPI.CurrentWeaponIndex)]
         private IAtomicVariable<int> CurrentWeaponIndex => _core.CurrentWeaponIndex;
         
-        [Get(WeaponAPI.SwitchingWeaponObservable)]
-        private IAtomicObservable<int> SwitchingWeaponObservable => _core.SwitchingWeaponObservable;
-        
         [Get(WeaponAPI.CurrentWeapon)]
-        private IAtomicValue<IAtomicObject> CurrentWeapon => _core.CurrentWeapon;
+        private IAtomicValueObservable<AtomicObject> CurrentWeapon => _core.CurrentWeapon;
         
         [SerializeField]
         private Character_Core _core;

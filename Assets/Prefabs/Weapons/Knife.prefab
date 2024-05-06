@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2635905d6cb1457f8b8cef4a4da6f189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackClip: {fileID: 8300000, guid: 6c6f8bb80b121224486804f368c16e26, type: 3}
+  _attackClip: {fileID: 8300000, guid: 8b7d587e80ee90543b2c25defe2836b8, type: 3}
+  _weaponSprite: {fileID: 21300000, guid: 4c7121f500597a64e9b18fbfb9a6dc08, type: 3}
   _collider: {fileID: 2562996471573799533}
   _attackInterval:
     value: 1.5

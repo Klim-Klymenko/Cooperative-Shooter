@@ -11,6 +11,10 @@ namespace Objects
         [SerializeField]
         private AudioClip _attackClip;
         
+        [Get(WeaponAPI.WeaponSprite)]
+        [SerializeField]
+        private Sprite _weaponSprite;
+        
         protected abstract IAtomicValue<float> AttackInterval { get; }
         protected abstract IAtomicAction AttackRequestAction { get; }
         

@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843040551733321952, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
       propertyPath: m_text
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4957717386776850935, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
       propertyPath: m_Type
@@ -107,5 +107,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1814300462957936311, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 592600917778729251}
   m_SourcePrefab: {fileID: 100100000, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
+--- !u!114 &121913632883516774 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4957717386776850935, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
+  m_PrefabInstance: {fileID: 5006954399869703313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6652369528833387046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1814300462957936311, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
+  m_PrefabInstance: {fileID: 5006954399869703313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &592600917778729251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652369528833387046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8f0d88399b98c498d627e88aa256cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentWeaponImage: {fileID: 121913632883516774}
+  _chargesText: {fileID: 6696727174241875057}
+--- !u!114 &6696727174241875057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1843040551733321952, guid: ea1c8d4d7f538ec47bfd4a5ca011d3f6, type: 3}
+  m_PrefabInstance: {fileID: 5006954399869703313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,7 +13,6 @@ namespace System
     [UsedImplicitly]
     internal sealed class AttackInputController : IStartGameListener, IUpdateGameListener
     {
-        private IAtomicValue<IAtomicObject> _currentWeapon;
         private IAtomicAction _attackAction;
         private Countdown _attackCountdown;
         private Countdown _cooldownCountdown;
@@ -29,12 +28,10 @@ namespace System
 
         void IStartGameListener.OnStart()
         {
-            IAtomicObservable<int> switchingWeaponObservable = _attacker.GetObservable<int>(WeaponAPI.SwitchingWeaponObservable);
-            switchingWeaponObservable.Subscribe(OnWeaponSwitched);
-
-            _currentWeapon = _attacker.GetValue<IAtomicObject>(WeaponAPI.CurrentWeapon);
+            IAtomicValueObservable<AtomicObject> currentWeapon = _attacker.GetValueObservable<AtomicObject>(WeaponAPI.CurrentWeapon);
+            currentWeapon.Subscribe(OnWeaponSwitched);
             
-            OnWeaponSwitched(0);
+            OnWeaponSwitched(currentWeapon.Value);
         }
 
         void IUpdateGameListener.OnUpdate()
@@ -68,11 +65,11 @@ namespace System
             _attackAction.Invoke();
         }
         
-        private void OnWeaponSwitched(int _)
+        private void OnWeaponSwitched(IAtomicObject currentWeapon)
         {
-            IAtomicValue<float> attackInterval = _currentWeapon.Value.GetValue<float>(WeaponAPI.AttackInterval);
+            IAtomicValue<float> attackInterval = currentWeapon.GetValue<float>(WeaponAPI.AttackInterval);
             
-            _attackAction = _currentWeapon.Value.GetAction(WeaponAPI.AttackRequestAction);
+            _attackAction = currentWeapon.GetAction(WeaponAPI.AttackRequestAction);
             _attackCountdown = new Countdown(attackInterval.Value);
             _cooldownCountdown = new Countdown(attackInterval.Value);
             
