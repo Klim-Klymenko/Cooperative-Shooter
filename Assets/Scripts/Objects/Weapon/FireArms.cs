@@ -32,8 +32,8 @@ namespace Objects
         
         private readonly AndExpression _aliveCondition = new();
         
-        internal override IAtomicObservable AttackRequestObservable => _shootComponent.ShootRequestObservable;
-        internal override IAtomicObservable AttackObservable => _shootComponent.ShootObservable;
+        public override IAtomicObservable AttackRequestObservable => _shootComponent.ShootRequestObservable;
+        public override IAtomicObservable AttackObservable => _shootComponent.ShootObservable;
         
         private ISpawner<Transform> _bulletSpawner;
         

@@ -32,8 +32,8 @@ namespace Objects
         
         private SwitchColliderMechanics _switchColliderMechanics;
         
-        internal override IAtomicObservable AttackRequestObservable => _attackRequestEvent;
-        internal override IAtomicObservable AttackObservable => _attackRequestEvent;
+        public override IAtomicObservable AttackRequestObservable => _attackRequestEvent;
+        public override IAtomicObservable AttackObservable => _attackRequestEvent;
         
         public override void Compose()
         {

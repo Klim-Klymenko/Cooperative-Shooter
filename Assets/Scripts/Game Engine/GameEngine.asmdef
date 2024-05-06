@@ -1,0 +1,4 @@
+﻿{
+  "name": "GameEngine",
+  "references":[ "GUID:a3a33e38bb00744b1b79d80c5a7fdeef", "GUID:c677f4a9936b40eda23525dbdf6e4baa", "GUID:5b54e950cf1144d18fecfa01784be23e" ]
+}
