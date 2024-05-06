@@ -651,7 +651,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 636973809568205580, guid: b81524ba881b1354fa82c06a589ab056, type: 3}
       propertyPath: _shootComponent._shootingInterval.value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1662807240512353315, guid: b81524ba881b1354fa82c06a589ab056, type: 3}
       propertyPath: m_LocalPosition.x
