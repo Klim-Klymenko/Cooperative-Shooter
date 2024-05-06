@@ -12,7 +12,7 @@ namespace GameEngine
         [SerializeField]
         private int _hitPoints;
         
-        private AtomicVariable<int> _currentHitPoints;
+        private AtomicVariable<int> _currentHitPoints = new();
         
         private readonly AtomicEvent<int> _takeDamageEvent = new();
         private readonly AtomicEvent _deathEvent = new();
@@ -22,7 +22,7 @@ namespace GameEngine
         private TakeDamageMechanics _takeDamageMechanics;
         private DeathMechanics _deathMechanics;
         
-        public IAtomicValue<int> CurrentHitPoints => _currentHitPoints;
+        public IAtomicObservable<int> HitPointsObservable => _currentHitPoints;
         public IAtomicEvent<int> TakeDamageEvent => _takeDamageEvent;
         public IAtomicObservable DeathObservable => _deathEvent;
         
@@ -30,7 +30,7 @@ namespace GameEngine
         
         public void Compose()
         {
-            _currentHitPoints = _hitPoints.AsVariable();
+            _currentHitPoints.Value = _hitPoints;
             
             _aliveCondition.Compose(() => _currentHitPoints.Value > 0);
             

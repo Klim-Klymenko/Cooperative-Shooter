@@ -55,7 +55,7 @@ MonoBehaviour:
   _collisionAttackComponent:
     _attackComponent:
       _damage:
-        value: 5
+        value: 100
 --- !u!65 &8710156062983143674
 BoxCollider:
   m_ObjectHideFlags: 0

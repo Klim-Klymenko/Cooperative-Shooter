@@ -29,7 +29,7 @@ namespace Objects
         [SerializeField]
         private SwitchingItemComponent _switchingItemComponent;
         
-        internal IAtomicValue<int> CurrentHitPoints => _healthComponent.CurrentHitPoints;
+        internal IAtomicObservable<int> HitPointsObservable => _healthComponent.HitPointsObservable;
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
         internal IAtomicVariable<Vector3> MovementDirection => _moveComponent.MovementDirection;

@@ -9,11 +9,8 @@ namespace Objects
     [Is(TypeAPI.Zombie, TypeAPI.Damageable, TypeAPI.Attacker, TypeAPI.NavMeshAgent)]
     internal sealed class Zombie : AtomicObject, IUpdateGameListener, IFinishGameListener
     {
-        [Get(LiveableAPI.HitPoints)] 
-        private IAtomicValue<int> CurrentHitPoints => _core.CurrentHitPoints;
-        
         [Get(LiveableAPI.TakeDamageAction)]
-        private IAtomicAction<int> TakeDamageAction => _core.TakeDamageAction;
+        private IAtomicAction<int> TakeDamageAction => _core.TakeDamageEvent;
         
         [Get(LiveableAPI.DeathObservable)]
         private IAtomicObservable DeathObservable => _core.DeathObservable;

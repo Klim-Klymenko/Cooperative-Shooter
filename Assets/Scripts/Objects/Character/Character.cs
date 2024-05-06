@@ -9,8 +9,8 @@ namespace Objects
     [Is(TypeAPI.Character, TypeAPI.Damageable, TypeAPI.Movable, TypeAPI.Striker, TypeAPI.Attacker)]
     internal sealed class Character : AtomicObject, IInitializeGameListener, IUpdateGameListener, IFinishGameListener
     {
-        [Get(LiveableAPI.HitPoints)] 
-        private IAtomicValue<int> CurrentHitPoints => _core.CurrentHitPoints;
+        [Get(LiveableAPI.HitPointsObservable)]
+        private IAtomicObservable<int> HitPointsObservable => _core.HitPointsObservable;
         
         [Get(LiveableAPI.TakeDamageAction)]
         private IAtomicAction<int> TakeDamageAction => _core.TakeDamageEvent;

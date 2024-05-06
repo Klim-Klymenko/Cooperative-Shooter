@@ -19,8 +19,7 @@ namespace Objects
         [SerializeField] 
         private CooldownAttackComponent _cooldownAttackComponent;
         
-        internal IAtomicValue<int> CurrentHitPoints => _healthComponent.CurrentHitPoints;
-        internal IAtomicAction<int> TakeDamageAction => _healthComponent.TakeDamageEvent;
+        internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
         
         internal IAtomicValue<Transform> TargetTransform => _cooldownAttackComponent.TargetTransform;
