@@ -11,5 +11,6 @@
         public const string Attacker = nameof(Attacker);
         public const string AssaultRifleBullet = nameof(AssaultRifleBullet);
         public const string RpgBullet = nameof(RpgBullet);
+        public const string Reward = nameof(Reward);
     }
 }

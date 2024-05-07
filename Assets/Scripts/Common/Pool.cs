@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zenject;
 
 namespace Common
 {
@@ -8,6 +9,8 @@ namespace Common
     public sealed class Pool<T> where T : Object
     {
         private readonly List<T> _objects;
+
+        private readonly DiContainer _diContainer;
         
         private readonly int _reservationAmount;
         private readonly T _prefab;
@@ -17,9 +20,11 @@ namespace Common
         
         public readonly string ObjectType;
         
-        public Pool(int reservationAmount, T prefab, Transform parent, string objectType = null)
+        public Pool(DiContainer diContainer, int reservationAmount, T prefab, Transform parent, string objectType = null)
         {
             _objects = new List<T>(reservationAmount);
+
+            _diContainer = diContainer;
             
             _reservationAmount = reservationAmount;
             _prefab = prefab;
@@ -35,7 +40,7 @@ namespace Common
         {
             for (int i = 0; i < _reservationAmount; i++)
             {
-                T obj = Object.Instantiate(_prefab, _spawnPosition, _spawnRotation, _parent);
+                T obj = _diContainer.InstantiatePrefabForComponent<T>(_prefab, _spawnPosition, _spawnRotation, _parent);
             
                 _objects.Add(obj);
                 SetActive(obj, false);
@@ -44,7 +49,7 @@ namespace Common
 
         public T Get()
         {
-            T obj = _objects.Count > 0 ? _objects[^1] : Object.Instantiate(_prefab, _spawnPosition, _spawnRotation, _parent);
+            T obj = _objects.Count > 0 ? _objects[^1] : _diContainer.InstantiatePrefabForComponent<T>(_prefab, _spawnPosition, _spawnRotation, _parent);
             
             SetActive(obj, true);
             _objects.Remove(obj);

@@ -27,12 +27,12 @@ namespace UI.DI
         private void BindFactories()
         {
             Container.Bind<Common.IFactory<CurrentWeaponView>>().To<CurrentWeaponViewFactory>().AsCached().WithArguments(_viewPrefab, _container);
-            Container.Bind<CurrentWeaponAdapterFactory>().AsSingle().WithArguments(_character);
+            Container.Bind<ICurrentWeaponAdapterFactory>().To<CurrentWeaponAdapterFactory>().AsCached().WithArguments(_character);
         }
 
         private void BindManager()
         {
-            Container.BindInterfacesTo<WeaponManager>().AsSingle();
+            Container.BindInterfacesTo<WeaponManager>().AsCached();
         }
     }
 }

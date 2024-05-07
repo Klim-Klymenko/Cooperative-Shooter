@@ -1,8 +1,10 @@
 ﻿using Atomic.Elements;
 using Atomic.Objects;
+using Common;
 using GameCycle;
 using GameEngine;
 using UnityEngine;
+using Zenject;
 
 namespace Objects
 {
@@ -20,7 +22,7 @@ namespace Objects
 
         [Get(AttackerAPI.AttackAction)]
         private IAtomicAction<IAtomicObject> AttackAction => _core.AttackAction;
-
+        
         [Get(VisualAPI.SkinnedMeshRenderer)]
         private SkinnedMeshRenderer SkinnedMeshRenderer => _animation.SkinnedMeshRenderer;
         
@@ -42,11 +44,19 @@ namespace Objects
 
         private bool _composed;
         
+        private ISpawner<AtomicObject, Transform> _rewardSpawner;
+        
+        [Inject]
+        internal void Construct(ISpawner<AtomicObject, Transform> rewardSpawner)
+        {
+            _rewardSpawner = rewardSpawner;
+        }
+        
         public override void Compose()
         {
             base.Compose();
 
-            _core.Compose(_targetTransform);
+            _core.Compose(_targetTransform, _rewardSpawner);
             _ai.Compose(_core);
             _animation.Compose(_core, _ai);
             _audio.Compose(_core);

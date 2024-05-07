@@ -38,8 +38,8 @@ namespace Objects
         {
             return new Pool<Bullet>[]
             {
-                new(_reservationAmount, _prefabs[0], _poolContainer, _bulletTypes[0].ToString()),
-                new(_reservationAmount, _prefabs[1], _poolContainer, _bulletTypes[1].ToString())
+                new(Container, _reservationAmount, _prefabs[0], _poolContainer, _bulletTypes[0].ToString()),
+                new(Container, _reservationAmount, _prefabs[1], _poolContainer, _bulletTypes[1].ToString())
             };
         }
     }

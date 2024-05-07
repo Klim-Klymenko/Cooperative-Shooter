@@ -7,9 +7,9 @@ namespace GameEngine
     public sealed class PassOnTargetMechanics
     {
         private readonly IAtomicFunction<Collider, bool> _passOnCondition;
-        private readonly IAtomicAction<AtomicObject> _onCollisionAction;
+        private readonly IAtomicAction<IAtomicObject> _onCollisionAction;
 
-        public PassOnTargetMechanics(IAtomicFunction<Collider, bool> passOnCondition, IAtomicAction<AtomicObject> onCollisionAction)
+        public PassOnTargetMechanics(IAtomicFunction<Collider, bool> passOnCondition, IAtomicAction<IAtomicObject> onCollisionAction)
         {
             _passOnCondition = passOnCondition;
             _onCollisionAction = onCollisionAction;
@@ -18,8 +18,8 @@ namespace GameEngine
         public void OnTriggerEnter(Collider other)
         {
             if (!_passOnCondition.Invoke(other)) return;
-            
-            AtomicObject target = other.gameObject.GetComponent<AtomicObject>();
+          
+            IAtomicObject target = other.gameObject.GetComponent<IAtomicObject>();
             _onCollisionAction?.Invoke(target);
         }
     }

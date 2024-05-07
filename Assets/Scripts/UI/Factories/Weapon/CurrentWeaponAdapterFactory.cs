@@ -7,7 +7,7 @@ using UI.View;
 namespace UI.Factories.Weapon
 {
     [UsedImplicitly]
-    internal sealed class CurrentWeaponAdapterFactory
+    internal sealed class CurrentWeaponAdapterFactory : ICurrentWeaponAdapterFactory
     {
         private readonly GameCycleManager _gameCycleManager;
         private readonly IAtomicObject _character;
@@ -18,7 +18,7 @@ namespace UI.Factories.Weapon
             _character = character;
         }
 
-        internal CurrentWeaponAdapter Create(CurrentWeaponView weaponView)
+        CurrentWeaponAdapter ICurrentWeaponAdapterFactory.Create(CurrentWeaponView weaponView)
         {
             CurrentWeaponAdapter weaponAdapter = new(weaponView, _character);
             _gameCycleManager.AddListener(weaponAdapter);

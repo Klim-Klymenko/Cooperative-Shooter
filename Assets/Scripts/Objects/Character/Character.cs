@@ -1,3 +1,4 @@
+using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using GameCycle;
@@ -32,6 +33,9 @@ namespace Objects
         
         [Get(WeaponAPI.CurrentWeapon)]
         private IAtomicValueObservable<AtomicObject> CurrentWeapon => _core.CurrentWeapon;
+        
+        [Get(RewardAPI.RewardAmount)]
+        private IAtomicValueObservable<int> RewardAmount => _core.RewardAmount;
         
         [SerializeField]
         private Character_Core _core;
@@ -71,6 +75,11 @@ namespace Objects
             _animation.Update();
             _audio.Update();
             _particle.Update();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            _core.OnTriggerEnter(other);
         }
 
         void IFinishGameListener.OnFinish()

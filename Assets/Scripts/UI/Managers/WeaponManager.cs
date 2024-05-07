@@ -10,9 +10,9 @@ namespace UI.Managers
     internal sealed class WeaponManager : IStartGameListener
     {
         private readonly IFactory<CurrentWeaponView> _weaponViewFactory;
-        private readonly CurrentWeaponAdapterFactory _weaponAdapterFactory;
+        private readonly ICurrentWeaponAdapterFactory _weaponAdapterFactory;
 
-        internal WeaponManager(IFactory<CurrentWeaponView> weaponViewFactory, CurrentWeaponAdapterFactory weaponAdapterFactory)
+        internal WeaponManager(IFactory<CurrentWeaponView> weaponViewFactory, ICurrentWeaponAdapterFactory weaponAdapterFactory)
         {
             _weaponViewFactory = weaponViewFactory;
             _weaponAdapterFactory = weaponAdapterFactory;

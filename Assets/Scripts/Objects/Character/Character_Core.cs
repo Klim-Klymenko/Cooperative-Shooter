@@ -4,6 +4,7 @@ using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
 using GameEngine;
+using GameEngine.Components;
 using UnityEngine;
 
 namespace Objects
@@ -29,6 +30,9 @@ namespace Objects
         [SerializeField]
         private SwitchingItemComponent _switchingItemComponent;
         
+        [SerializeField]
+        private TakeRewardComponent _takeRewardComponent;
+        
         internal IAtomicVariableObservable<int> HitPoints => _healthComponent.HitPoints;
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
@@ -37,6 +41,7 @@ namespace Objects
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
         internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
         internal IAtomicValueObservable<AtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
+        internal IAtomicValueObservable<int> RewardAmount => _takeRewardComponent.RewardAmount;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;
@@ -62,6 +67,12 @@ namespace Objects
             
             AtomicObject[] weapons = _weaponComponent.Weapons.Select(it => it as AtomicObject).ToArray();
             _switchingItemComponent.Compose(weapons);
+            
+            _takeRewardComponent.Let(it =>
+            {
+                it.Compose();
+                it.AliveCondition.Append(AliveCondition);
+            });
         }
         
         internal void OnEnable()
@@ -74,6 +85,11 @@ namespace Objects
         {
             _moveComponent.Update();
             _rotationComponent.Update();
+        }
+        
+        internal void OnTriggerEnter(Collider other)
+        {
+            _takeRewardComponent.OnTriggerEnter(other);
         }
         
         internal void OnDisable()

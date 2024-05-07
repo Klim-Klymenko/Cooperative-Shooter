@@ -2,7 +2,9 @@
 using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
+using Common;
 using GameEngine;
+using GameEngine.Components;
 using UnityEngine;
 
 namespace Objects
@@ -18,6 +20,9 @@ namespace Objects
         
         [SerializeField] 
         private CooldownAttackComponent _cooldownAttackComponent;
+
+        [SerializeField]
+        private InstantiateRewardComponent _instantiateRewardComponent;
         
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
         internal IAtomicObservable DeathObservable => _healthComponent.DeathObservable;
@@ -29,7 +34,7 @@ namespace Objects
         internal IAtomicObservable AttackEvent => _cooldownAttackComponent.AttackEvent;
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         
-        internal void Compose(AtomicVariable<Transform> targetTransform)
+        internal void Compose(AtomicVariable<Transform> targetTransform, ISpawner<AtomicObject, Transform> rewardSpawner)
         {
             _healthComponent.Compose();
 
@@ -38,6 +43,8 @@ namespace Objects
                 it.Compose(_transform, targetTransform);
                 it.AttackCondition.Append(AliveCondition);
             });
+            
+            _instantiateRewardComponent.Compose(rewardSpawner, DeathObservable);
         }
         
         internal void OnEnable()

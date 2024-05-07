@@ -12,13 +12,10 @@ namespace Objects
     internal sealed class ZombiePlacer : AtomicObject, IStartGameListener, IUpdateGameListener, IFinishGameListener
     {
         [SerializeField]
-        [HideInInspector]
-        private AtomicAction _zombieSpawnAction;
-        
-        private readonly AtomicVariable<bool> _aliveCondition = new();
-
-        [SerializeField]
         private CooldownComponent _cooldownComponent;
+        
+        private readonly AtomicAction _zombieSpawnAction = new();
+        private readonly AtomicVariable<bool> _aliveCondition = new();
 
         private ISpawner<Zombie> _spawner;
 
