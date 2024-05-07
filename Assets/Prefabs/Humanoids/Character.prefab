@@ -478,8 +478,8 @@ MonoBehaviour:
   _audio:
     _audioSource: {fileID: 833582486}
     _moveAudioSource: {fileID: 72327594}
-    _takeDamageClip: {fileID: 8300000, guid: 356001d1487a2c7498a9b3aedc8550e2, type: 3}
-    _deathClip: {fileID: 8300000, guid: 1a54c930d948d0c4d8cddf2fc6939826, type: 3}
+    _takeDamageClip: {fileID: 8300000, guid: e7ef35adaca30084fb4d8fc872609ea0, type: 3}
+    _deathClip: {fileID: 8300000, guid: a9a610204bc3a0b4395c82f40fcc613c, type: 3}
     _moveClip: {fileID: 8300000, guid: 8b538abbfbed3fd43ba25a4c09e30ddc, type: 3}
   _particle:
     _damageParticle: {fileID: 7160757875473398899}
