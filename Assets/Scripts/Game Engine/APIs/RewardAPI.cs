@@ -8,7 +8,7 @@ namespace GameEngine
         [Contract(typeof(IAtomicVariable<int>))] 
         public const string Reward = nameof(Reward);
         
-        [Contract(typeof(IAtomicValueObservable<int>))]
+        [Contract(typeof(IAtomicVariableObservable<int>))]
         public const string RewardAmount = nameof(RewardAmount);
     }
 }

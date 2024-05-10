@@ -35,7 +35,7 @@ namespace Objects
         private IAtomicValueObservable<AtomicObject> CurrentWeapon => _core.CurrentWeapon;
         
         [Get(RewardAPI.RewardAmount)]
-        private IAtomicValueObservable<int> RewardAmount => _core.RewardAmount;
+        private IAtomicVariableObservable<int> RewardAmount => _core.RewardAmount;
         
         [SerializeField]
         private Character_Core _core;

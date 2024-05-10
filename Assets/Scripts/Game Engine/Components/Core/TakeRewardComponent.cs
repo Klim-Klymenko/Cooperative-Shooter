@@ -18,7 +18,7 @@ namespace GameEngine.Components
         
         private PassOnTargetMechanics _passOnTargetMechanics;
         
-        public IAtomicValueObservable<int> RewardAmount => _currentRewardAmount;
+        public IAtomicVariableObservable<int> RewardAmount => _currentRewardAmount;
 
         public IAtomicExpression<bool> AliveCondition => _aliveCondition;
         

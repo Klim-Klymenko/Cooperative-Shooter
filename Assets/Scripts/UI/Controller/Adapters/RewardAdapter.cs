@@ -24,7 +24,7 @@ namespace UI.Controller
 
         void IStartGameListener.OnStart()
         {
-            _rewardAmount = _character.GetValueObservable<int>(RewardAPI.RewardAmount);
+            _rewardAmount = _character.GetVariableObservable<int>(RewardAPI.RewardAmount);
             _rewardAmount.Subscribe(ChangeReward);
             ChangeReward(_rewardAmount.Value);
         }

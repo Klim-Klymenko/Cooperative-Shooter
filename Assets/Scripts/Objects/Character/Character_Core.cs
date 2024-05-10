@@ -41,7 +41,7 @@ namespace Objects
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
         internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
         internal IAtomicValueObservable<AtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
-        internal IAtomicValueObservable<int> RewardAmount => _takeRewardComponent.RewardAmount;
+        internal IAtomicVariableObservable<int> RewardAmount => _takeRewardComponent.RewardAmount;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;
