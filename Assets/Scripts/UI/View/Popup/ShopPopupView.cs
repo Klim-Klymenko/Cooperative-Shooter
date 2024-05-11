@@ -5,19 +5,22 @@ using Zenject;
 
 namespace UI.View.Popup
 {
-    public sealed class ShopPopupView : MonoBehaviour
+    internal sealed class ShopPopupView : MonoBehaviour
     {
-        private IShopProductViewFactory _productViewFactory;
+        [SerializeField]
+        private Transform _itemContainer;
+        
+        private IShopProductViewSpawner _productViewSpawner;
 
         private ShopProductView[] _productViews;
         
         [Inject]
-        internal void Construct(IShopProductViewFactory productViewFactory)
+        internal void Construct(IShopProductViewSpawner productViewSpawner)
         {
-            _productViewFactory = productViewFactory;
+            _productViewSpawner = productViewSpawner;
         }
         
-        public void Show(IShopPopupPresenter popupPresenter)
+        internal void Show(IShopPopupPresenter popupPresenter)
         {
             IReadOnlyList<IShopProductPresenter> productPresenters = popupPresenter.ProductPresenters;
             
@@ -25,15 +28,24 @@ namespace UI.View.Popup
             
             for (int i = 0; i < productPresenters.Count; i++)
             {
-                ShopProductView productView = _productViewFactory.Create(productPresenters[i]);
+                ShopProductView productView = _productViewSpawner.Spawn(_itemContainer);
+                
+                productView.Show(productPresenters[i]);
                 _productViews[i] = productView;
             }
         }
 
-        public void Hide()
+        internal void Hide()
         {
             for (int i = 0; i < _productViews.Length; i++)
-                _productViews[i].Hide();
+            {
+                ShopProductView view = _productViews[i];
+                
+                view.Hide();
+                _productViewSpawner.Despawn(view);
+            }
+
+            _productViews = null;
         }
     }
 }

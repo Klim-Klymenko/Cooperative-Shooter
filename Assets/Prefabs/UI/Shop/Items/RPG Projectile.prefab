@@ -159,6 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3216153022865012534}
+  - component: {fileID: 6851997122242451206}
   m_Layer: 5
   m_Name: RPG Projectile
   m_TagString: Untagged
@@ -191,6 +192,23 @@ RectTransform:
   m_AnchoredPosition: {x: 699, y: -412}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6851997122242451206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147027021626898267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 5983382161319059589}
+  _frameImage: {fileID: 7171306277313742600}
+  _priceText: {fileID: 5630951961175060671}
+  _quantityText: {fileID: 40104889257596636}
+  _buyButton: {fileID: 4804750263401385946}
 --- !u!1 &2879482925143724729
 GameObject:
   m_ObjectHideFlags: 0

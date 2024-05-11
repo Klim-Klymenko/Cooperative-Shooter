@@ -622,6 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3623175570325452919}
+  - component: {fileID: 3936403379651999918}
   m_Layer: 5
   m_Name: Armor
   m_TagString: Untagged
@@ -654,3 +655,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1496, y: 548}
   m_SizeDelta: {x: 400, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3936403379651999918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6693815064411105177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 4751054327796196282}
+  _frameImage: {fileID: 1213046496360322434}
+  _priceText: {fileID: 2499209424634973224}
+  _quantityText: {fileID: 704568660386018380}
+  _buyButton: {fileID: 3953650931437133388}

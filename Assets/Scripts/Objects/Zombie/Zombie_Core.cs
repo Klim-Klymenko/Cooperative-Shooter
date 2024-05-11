@@ -5,6 +5,8 @@ using Atomic.Objects;
 using Common;
 using GameEngine;
 using GameEngine.Components;
+using GameEngine.Interfaces;
+using Objects.Reward;
 using UnityEngine;
 
 namespace Objects
@@ -34,7 +36,7 @@ namespace Objects
         internal IAtomicObservable AttackEvent => _cooldownAttackComponent.AttackEvent;
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         
-        internal void Compose(AtomicVariable<Transform> targetTransform, ISpawner<AtomicObject, Transform> rewardSpawner)
+        internal void Compose(AtomicVariable<Transform> targetTransform, IRewardSpawner rewardSpawner)
         {
             _healthComponent.Compose();
 

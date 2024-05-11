@@ -6,8 +6,8 @@ namespace UI.View
     {
         Sprite Icon { get; }
         Sprite Frame { get; }
-        int Price { get; }
-        int Quantity { get; }
+        string Price { get; }
+        string Quantity { get; }
         
         void BuyProduct();
     }

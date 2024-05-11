@@ -4,6 +4,7 @@ using Atomic.Objects;
 using Common;
 using GameCycle;
 using GameEngine;
+using GameEngine.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -38,10 +39,10 @@ namespace Objects
         public override IAtomicObservable AttackRequestObservable => _shootComponent.ShootRequestObservable;
         public override IAtomicObservable AttackObservable => _shootComponent.ShootObservable;
         
-        private ISpawner<Transform> _bulletSpawner;
+        private IBulletSpawner _bulletSpawner;
         
         [Inject]
-        internal void Construct(ISpawner<Transform> bulletSpawner)
+        internal void Construct(IBulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
         }

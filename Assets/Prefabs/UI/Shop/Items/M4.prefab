@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4571508237061267176}
+  - component: {fileID: 7143221447154079498}
   m_Layer: 5
   m_Name: M4
   m_TagString: Untagged
@@ -116,6 +117,23 @@ RectTransform:
   m_AnchoredPosition: {x: 251, y: 128}
   m_SizeDelta: {x: 870, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7143221447154079498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659105551798218805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 1610096104686785902}
+  _frameImage: {fileID: 482402935899164731}
+  _priceText: {fileID: 5205691007110093607}
+  _quantityText: {fileID: 8368065914215600493}
+  _buyButton: {fileID: 6182776804660328858}
 --- !u!1 &2773583868546512539
 GameObject:
   m_ObjectHideFlags: 0

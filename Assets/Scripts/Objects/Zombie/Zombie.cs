@@ -3,6 +3,8 @@ using Atomic.Objects;
 using Common;
 using GameCycle;
 using GameEngine;
+using GameEngine.Interfaces;
+using Objects.Reward;
 using UnityEngine;
 using Zenject;
 
@@ -44,10 +46,10 @@ namespace Objects
 
         private bool _composed;
         
-        private ISpawner<AtomicObject, Transform> _rewardSpawner;
+        private IRewardSpawner _rewardSpawner;
         
         [Inject]
-        internal void Construct(ISpawner<AtomicObject, Transform> rewardSpawner)
+        internal void Construct(IRewardSpawner rewardSpawner)
         {
             _rewardSpawner = rewardSpawner;
         }

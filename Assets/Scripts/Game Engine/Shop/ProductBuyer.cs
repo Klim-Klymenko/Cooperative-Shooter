@@ -2,13 +2,12 @@
 using Atomic.Extensions;
 using Atomic.Objects;
 using GameCycle;
-using GameEngine;
 using JetBrains.Annotations;
 
 namespace GameEngine.Shop
 {
     [UsedImplicitly]
-    internal sealed class ProductBuyer : IProductBuyer, IStartGameListener 
+    public sealed class ProductBuyer : IProductBuyer, IStartGameListener 
     {
         private IAtomicVariableObservable<int> _currency;
 

@@ -26,8 +26,8 @@ namespace UI.DI
         
         private void BindFactories()
         {
-            Container.Bind<Common.IFactory<RewardView>>().To<RewardViewFactory>().AsCached().WithArguments(_prefab, _container);
-            Container.Bind<IRewardAdapterFactory>().To<RewardAdapterFactory>().AsCached().WithArguments(_character);
+            Container.Bind<Common.IFactory<RewardView>>().To<RewardViewFactory>().AsSingle().WithArguments(_prefab, _container);
+            Container.Bind<IRewardAdapterFactory>().To<RewardAdapterFactory>().AsSingle().WithArguments(_character);
         }
 
         private void BindManager()

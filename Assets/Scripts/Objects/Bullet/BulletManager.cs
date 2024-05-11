@@ -5,13 +5,14 @@ using Atomic.Extensions;
 using Common;
 using GameCycle;
 using GameEngine;
+using GameEngine.Interfaces;
 using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Objects
 {
     [UsedImplicitly]
-    internal sealed class BulletManager : ISpawner<Transform>, IFinishGameListener
+    internal sealed class BulletManager : IBulletSpawner, IFinishGameListener
     {
         private readonly List<Bullet> _activeBullets = new();
         
@@ -26,7 +27,7 @@ namespace Objects
             _gameCycleManager = gameCycleManager;
         }
 
-        Transform ISpawner<Transform>.Spawn(string objectType)
+        Transform IBulletSpawner.Spawn(string objectType)
         {
             int index = FindPoolIndex(objectType);
             
@@ -51,10 +52,10 @@ namespace Objects
             
             return bulletTransform;
         }
-        
-        public void Despawn(Transform obj)
+
+        public void Despawn(Transform bulletTransform)
         {
-            Bullet bullet = obj.GetComponent<Bullet>();
+            Bullet bullet = bulletTransform.GetComponent<Bullet>();
             
             bullet.OnFinish();
             _gameCycleManager.RemoveListener(bullet);

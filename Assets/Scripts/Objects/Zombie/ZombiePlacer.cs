@@ -31,7 +31,7 @@ namespace Objects
 
             _aliveCondition.Value = true;
             
-            _zombieSpawnAction.Compose(() => _spawner.Spawn(null));
+            _zombieSpawnAction.Compose(() => _spawner.Spawn());
 
             _cooldownComponent.Let(it =>
             {

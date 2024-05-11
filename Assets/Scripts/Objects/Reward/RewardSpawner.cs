@@ -3,13 +3,14 @@ using Atomic.Extensions;
 using Atomic.Objects;
 using Common;
 using GameEngine;
+using GameEngine.Interfaces;
 using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Objects.Reward
 {
     [UsedImplicitly]
-    internal class RewardSpawner : ISpawner<AtomicObject, Transform>
+    internal class RewardSpawner : IRewardSpawner
     {
         private readonly Pool<Reward> _pool;
         
@@ -17,8 +18,8 @@ namespace Objects.Reward
         {
             _pool = pool;
         }
-
-        AtomicObject ISpawner<AtomicObject, Transform>.Spawn(Transform spawnPoint)
+        
+        AtomicObject IRewardSpawner.Spawn(Transform spawnPoint)
         {
             Reward reward = _pool.Get();
             

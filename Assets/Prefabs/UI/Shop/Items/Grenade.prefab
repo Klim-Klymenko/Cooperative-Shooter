@@ -622,6 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2562151934972461797}
+  - component: {fileID: 7166298555134498381}
   m_Layer: 5
   m_Name: Grenade
   m_TagString: Untagged
@@ -654,3 +655,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1988, y: -395}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7166298555134498381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261090020380886228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 8522001016920644599}
+  _frameImage: {fileID: 2694617299675678796}
+  _priceText: {fileID: 4281192885630529752}
+  _quantityText: {fileID: 4062459506586921879}
+  _buyButton: {fileID: 9196075948546997546}

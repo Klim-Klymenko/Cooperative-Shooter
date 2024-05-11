@@ -547,6 +547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8202853997607785301}
+  - component: {fileID: 673659215763582161}
   m_Layer: 5
   m_Name: Bullets
   m_TagString: Untagged
@@ -579,6 +580,23 @@ RectTransform:
   m_AnchoredPosition: {x: 60, y: -412}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &673659215763582161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789025385830237915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 3995248655222488488}
+  _frameImage: {fileID: 2934029114220343706}
+  _priceText: {fileID: 4087522015167921372}
+  _quantityText: {fileID: 5358806056789587561}
+  _buyButton: {fileID: 2129778257237051874}
 --- !u!1 &8701992197939541620
 GameObject:
   m_ObjectHideFlags: 0

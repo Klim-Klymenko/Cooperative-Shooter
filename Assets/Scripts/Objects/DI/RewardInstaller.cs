@@ -1,5 +1,4 @@
-﻿using Atomic.Objects;
-using Common;
+﻿using GameEngine.Interfaces;
 using Objects.Reward;
 using UnityEngine;
 using Zenject;
@@ -30,7 +29,7 @@ namespace Objects
 
         private void BindSpawner()
         {
-            Container.Bind<ISpawner<AtomicObject, Transform>>().To<RewardSpawner>().AsSingle();
+            Container.Bind<IRewardSpawner>().To<RewardSpawner>().AsSingle();
         }
     }
 }

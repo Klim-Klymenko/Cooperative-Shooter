@@ -12,7 +12,7 @@ namespace Common
 
         private readonly DiContainer _diContainer;
         
-        private readonly int _reservationAmount;
+        private readonly int _poolSize;
         private readonly T _prefab;
         private readonly Vector3 _spawnPosition;
         private readonly Quaternion _spawnRotation;
@@ -20,13 +20,13 @@ namespace Common
         
         public readonly string ObjectType;
         
-        public Pool(DiContainer diContainer, int reservationAmount, T prefab, Transform parent, string objectType = null)
+        public Pool(DiContainer diContainer, int poolSize, T prefab, Transform parent, string objectType = null)
         {
-            _objects = new List<T>(reservationAmount);
+            _objects = new List<T>(poolSize);
 
             _diContainer = diContainer;
             
-            _reservationAmount = reservationAmount;
+            _poolSize = poolSize;
             _prefab = prefab;
             _spawnPosition = Vector3.zero;
             _spawnRotation = Quaternion.identity;
@@ -38,7 +38,7 @@ namespace Common
         
         private void Reserve()
         {
-            for (int i = 0; i < _reservationAmount; i++)
+            for (int i = 0; i < _poolSize; i++)
             {
                 T obj = _diContainer.InstantiatePrefabForComponent<T>(_prefab, _spawnPosition, _spawnRotation, _parent);
             

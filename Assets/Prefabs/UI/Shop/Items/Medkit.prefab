@@ -293,6 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8430725194336890663}
+  - component: {fileID: 9186384065106272059}
   m_Layer: 5
   m_Name: Medkit
   m_TagString: Untagged
@@ -325,6 +326,23 @@ RectTransform:
   m_AnchoredPosition: {x: 1352, y: -388}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9186384065106272059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169620052215646474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 1290982902956065717}
+  _frameImage: {fileID: 6565676059486599637}
+  _priceText: {fileID: 3838423989304732794}
+  _quantityText: {fileID: 851983644189428957}
+  _buyButton: {fileID: 4347855800509039504}
 --- !u!1 &5776833570166654627
 GameObject:
   m_ObjectHideFlags: 0

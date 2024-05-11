@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1491085730312166}
+  - component: {fileID: 2905158363439021205}
   m_Layer: 5
   m_Name: AK-47
   m_TagString: Untagged
@@ -41,6 +42,23 @@ RectTransform:
   m_AnchoredPosition: {x: 425, y: 548}
   m_SizeDelta: {x: 870, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2905158363439021205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35189538488917366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a86ef2cb8f4589814142a70ba9a9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 5420786435137323688}
+  _frameImage: {fileID: 962111705040814515}
+  _priceText: {fileID: 1871848160834345152}
+  _quantityText: {fileID: 8042823248257050013}
+  _buyButton: {fileID: 1874145537107161850}
 --- !u!1 &1687804615335934689
 GameObject:
   m_ObjectHideFlags: 0

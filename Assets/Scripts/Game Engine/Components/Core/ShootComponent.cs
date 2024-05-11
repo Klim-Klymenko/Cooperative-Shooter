@@ -2,6 +2,7 @@
 using Atomic.Elements;
 using Common;
 using GameEngine.Data;
+using GameEngine.Interfaces;
 using UnityEngine;
 
 namespace GameEngine
@@ -37,7 +38,7 @@ namespace GameEngine
         public IAtomicObservable ShootObservable => _shootEvent;
         public IAtomicExpression<bool> ShootCondition => _shootCondition;
 
-        public void Compose(ISpawner<Transform> bulletSpawner)
+        public void Compose(IBulletSpawner bulletSpawner)
         {
             _shootCondition.Append(new AtomicFunction<bool>(() => _charges.Value > 0));
             

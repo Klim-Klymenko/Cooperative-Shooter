@@ -26,8 +26,8 @@ namespace UI.DI
         
         private void BindFactories()
         {
-            Container.Bind<Common.IFactory<CurrentWeaponView>>().To<CurrentWeaponViewFactory>().AsCached().WithArguments(_viewPrefab, _container);
-            Container.Bind<ICurrentWeaponAdapterFactory>().To<CurrentWeaponAdapterFactory>().AsCached().WithArguments(_character);
+            Container.Bind<Common.IFactory<CurrentWeaponView>>().To<CurrentWeaponViewFactory>().AsSingle().WithArguments(_viewPrefab, _container);
+            Container.Bind<ICurrentWeaponAdapterFactory>().To<CurrentWeaponAdapterFactory>().AsSingle().WithArguments(_character);
         }
 
         private void BindManager()

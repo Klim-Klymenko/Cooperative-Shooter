@@ -2,7 +2,7 @@
 using Atomic.Elements;
 using Atomic.Extensions;
 using Atomic.Objects;
-using Common;
+using GameEngine.Interfaces;
 using UnityEngine;
 
 namespace GameEngine.Components
@@ -16,7 +16,7 @@ namespace GameEngine.Components
         [SerializeField]
         private AtomicValue<int> _rewardAmount;
         
-        public void Compose(ISpawner<AtomicObject, Transform> rewardSpawner, IAtomicObservable spawnObservable)
+        public void Compose(IRewardSpawner rewardSpawner, IAtomicObservable spawnObservable)
         {
             AtomicAction spawnRewardAction = new(() =>
             {
