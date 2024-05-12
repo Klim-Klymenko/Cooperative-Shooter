@@ -14,13 +14,14 @@ namespace UI.Controller.Presenters
 
         private readonly IProductBuyer _productBuyer;
         private readonly IPurchaseEffect _purchaseEffect;
+        private readonly ProductInfo _productInfo;
         private readonly int _price;
 
         internal ShopProductPresenter(ProductInfo productInfo, IProductBuyer productBuyer, IPurchaseEffect purchaseEffect)
         {
             _productBuyer = productBuyer;
-            
             _purchaseEffect = purchaseEffect;
+            _productInfo = productInfo;
             _price = productInfo.Price;
 
             Icon = productInfo.Icon;
@@ -34,7 +35,7 @@ namespace UI.Controller.Presenters
             if (!_productBuyer.CanBuyProduct(_price)) return;
          
             _productBuyer.BuyProduct(_price);
-            _purchaseEffect.Invoke();
+            _purchaseEffect.Invoke(_productInfo);
         }
     }
 }

@@ -52,7 +52,13 @@ namespace UI.DI
         private AtomicObject _berril;
         
         [SerializeField]
-        private int _swapWeaponIndex;
+        private int _swapWeaponIndex = 1;
+        
+        [SerializeField]
+        private int _assaultRifleIndex = 1;
+        
+        [SerializeField]
+        private int _rpgIndex = 2;
         
         public override void InstallBindings()
         {
@@ -81,8 +87,19 @@ namespace UI.DI
 
         private void BindPurchaseEffects()
         {
-            for (int i = 0; i < _productViewPrefabs.Length; i++)
-                Container.Bind<IPurchaseEffect>().To<GunPurchaseEffect>().AsCached().WithArguments(_character, _berril, _swapWeaponIndex);
+            IPurchaseEffect[] purchaseEffects =
+            {
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex),
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex),
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex),
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex),
+                new BulletsPurchaseEffect(_character, _assaultRifleIndex),
+                new BulletsPurchaseEffect(_character, _rpgIndex),
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex),
+                new GunPurchaseEffect(_character, _berril, _swapWeaponIndex)
+            };
+
+            Container.Bind<IPurchaseEffect[]>().FromInstance(purchaseEffects).AsSingle();
         }
         
         private void BindPools()

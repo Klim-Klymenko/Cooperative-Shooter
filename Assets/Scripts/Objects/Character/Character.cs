@@ -35,6 +35,9 @@ namespace Objects
         
         [Get(WeaponAPI.CurrentWeapon)]
         private IAtomicValueObservable<AtomicObject> CurrentWeapon => _core.CurrentWeapon;
+
+        [Get(WeaponAPI.Weapons)] 
+        private AtomicObject[] Weapons => _core.Weapons;
         
         [Get(RewardAPI.RewardAmount)]
         private IAtomicVariableObservable<int> RewardAmount => _core.RewardAmount;

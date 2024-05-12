@@ -45,6 +45,7 @@ namespace Objects
         internal IAtomicVariable<Vector3> RotationDirection => _rotationComponent.RotationDirection;
         internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
         internal IAtomicValueObservable<AtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
+        internal AtomicObject[] Weapons => _switchingItemComponent.AtomicItems;
         internal IAtomicVariableObservable<int> RewardAmount => _takeRewardComponent.RewardAmount;
         internal IAtomicAction<int, AtomicObject> SwapWeaponAction => _swapItemComponent.SwapItemEvent;
         

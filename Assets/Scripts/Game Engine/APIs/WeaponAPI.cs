@@ -28,6 +28,9 @@ namespace GameEngine
         [Contract(typeof(IAtomicAction<int, AtomicObject>))]
         public const string SwapWeaponAction = nameof(SwapWeaponAction);
         
+        [Contract(typeof(AtomicObject[]))]
+        public const string Weapons = nameof(Weapons);
+        
         [Contract(typeof(Sprite))]
         public const string WeaponSprite = nameof(WeaponSprite);
     }

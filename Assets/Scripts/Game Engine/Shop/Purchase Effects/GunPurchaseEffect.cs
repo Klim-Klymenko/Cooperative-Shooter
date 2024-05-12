@@ -1,5 +1,6 @@
 ﻿using Atomic.Extensions;
 using Atomic.Objects;
+using GameEngine.Shop.Configs;
 using JetBrains.Annotations;
 
 namespace GameEngine.Shop
@@ -11,14 +12,14 @@ namespace GameEngine.Shop
         private readonly AtomicObject _gun;
         private readonly int _swapWeaponIndex;
 
-        internal GunPurchaseEffect(IAtomicObject character, AtomicObject gun, int swapWeaponIndex)
+        public GunPurchaseEffect(IAtomicObject character, AtomicObject gun, int swapWeaponIndex)
         {
             _character = character;
             _gun = gun;
             _swapWeaponIndex = swapWeaponIndex;
         }
 
-        void IPurchaseEffect.Invoke()
+        void IPurchaseEffect.Invoke(ProductInfo _)
         {
             _character.InvokeAction(WeaponAPI.SwapWeaponAction, _swapWeaponIndex, _gun);
         }

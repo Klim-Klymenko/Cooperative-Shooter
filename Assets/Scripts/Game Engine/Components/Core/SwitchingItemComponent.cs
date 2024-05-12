@@ -22,12 +22,12 @@ namespace GameEngine
         
         private SwitchItemMechanics _switchItemMechanics;
         private AssignCurrentItemMechanics _assignCurrentItemMechanics;
-
-        public GameObject[] ItemsGO => _items;
-        public AtomicObject[] AtomicItems => _atomicItems;
         
         public IAtomicVariable<int> CurrentItemIndex => _currentItemIndex;
         public IAtomicVariableObservable<AtomicObject> CurrentItem => _currentItem;
+        public AtomicObject[] AtomicItems => _atomicItems;
+
+        public GameObject[] ItemsGO => _items;
 
         public void Compose()
         {

@@ -123,6 +123,7 @@ MonoBehaviour:
     _cooldownComponent:
       _cooldownInterval:
         value: 2
+    _gameObject: {fileID: 7232525191824777272}
 --- !u!1001 &2333733802722773973
 PrefabInstance:
   m_ObjectHideFlags: 0

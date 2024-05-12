@@ -92,6 +92,7 @@ MonoBehaviour:
     _cooldownComponent:
       _cooldownInterval:
         value: 1.5
+    _gameObject: {fileID: 7160169965908856841}
 --- !u!1 &8879127018560856356
 GameObject:
   m_ObjectHideFlags: 0

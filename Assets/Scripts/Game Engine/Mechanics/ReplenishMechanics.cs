@@ -6,11 +6,13 @@ namespace GameEngine
     {
         private readonly IAtomicObservable _replenishObservable;
         private readonly IAtomicVariable<int> _replenishable;
+        private readonly IAtomicValue<bool> _replenishCondition;
 
-        public ReplenishMechanics(IAtomicObservable replenishObservable, IAtomicVariable<int> replenishable)
+        public ReplenishMechanics(IAtomicObservable replenishObservable, IAtomicVariable<int> replenishable, IAtomicValue<bool> replenishCondition)
         {
             _replenishObservable = replenishObservable;
             _replenishable = replenishable;
+            _replenishCondition = replenishCondition;
         }
         
         public void OnEnable()
@@ -25,7 +27,8 @@ namespace GameEngine
 
         private void OnReplenish()
         {
-            _replenishable.Value++;
+            if (_replenishCondition.Value)
+                _replenishable.Value++;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Atomic.Elements;
+using Atomic.Extensions;
 using UnityEngine;
 
 namespace GameEngine
@@ -9,6 +10,9 @@ namespace GameEngine
     {
         [SerializeField] 
         private CooldownComponent _cooldownComponent;
+
+        [SerializeField] 
+        private GameObject _gameObject;
         
         private readonly AtomicEvent _replenishEvent = new();
         private readonly AndExpression _replenishCondition = new();
@@ -19,8 +23,15 @@ namespace GameEngine
         
         public void Compose(IAtomicVariable<int> charges)
         {
-            _cooldownComponent.Compose(_replenishEvent);
-            _replenishMechanics = new ReplenishMechanics(_replenishEvent, charges);
+            _replenishCondition.Append(new AtomicFunction<bool>(() => _gameObject.activeInHierarchy));
+            
+            _cooldownComponent.Let(it =>
+            {
+                it.Compose(_replenishEvent);
+                it.CoolDownCondition.Append(_replenishCondition);
+            });
+            
+            _replenishMechanics = new ReplenishMechanics(_replenishEvent, charges, _replenishCondition);
         }
         
         public void OnEnable()
