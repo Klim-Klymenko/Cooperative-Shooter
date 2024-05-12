@@ -5,6 +5,7 @@ using Atomic.Extensions;
 using Atomic.Objects;
 using GameEngine;
 using GameEngine.Components;
+using GameEngine.Components.Core;
 using UnityEngine;
 
 namespace Objects
@@ -14,7 +15,7 @@ namespace Objects
     {
         [SerializeField]
         private Transform _transform;
-        
+      
         [SerializeField]
         private HealthComponent _healthComponent;
         
@@ -32,6 +33,9 @@ namespace Objects
         
         [SerializeField]
         private TakeRewardComponent _takeRewardComponent;
+
+        [SerializeField] 
+        private SwapItemComponent _swapItemComponent;
         
         internal IAtomicVariableObservable<int> HitPoints => _healthComponent.HitPoints;
         internal IAtomicEvent<int> TakeDamageEvent => _healthComponent.TakeDamageEvent;
@@ -42,6 +46,7 @@ namespace Objects
         internal IAtomicVariable<int> CurrentWeaponIndex => _switchingItemComponent.CurrentItemIndex;
         internal IAtomicValueObservable<AtomicObject> CurrentWeapon => _switchingItemComponent.CurrentItem;
         internal IAtomicVariableObservable<int> RewardAmount => _takeRewardComponent.RewardAmount;
+        internal IAtomicAction<int, AtomicObject> SwapWeaponAction => _swapItemComponent.SwapItemEvent;
         
         internal IAtomicValue<bool> AliveCondition => _healthComponent.AliveCondition;
         internal IAtomicObservable AttackRequestObservable => _weaponComponent.AttackRequestObservable;
@@ -64,10 +69,14 @@ namespace Objects
             });
 
             _weaponComponent.Compose();
-            
-            AtomicObject[] weapons = _weaponComponent.Weapons.Select(it => it as AtomicObject).ToArray();
-            _switchingItemComponent.Compose(weapons);
-            
+            _switchingItemComponent.Compose();
+
+            _swapItemComponent.Let(it =>
+            {
+                it.Compose(_switchingItemComponent.AtomicItems, _switchingItemComponent.ItemsGO, _switchingItemComponent.CurrentItem, CurrentWeaponIndex);
+                it.SwapItemCondition.Append(AliveCondition);
+            });
+           
             _takeRewardComponent.Let(it =>
             {
                 it.Compose();
@@ -79,6 +88,7 @@ namespace Objects
         {
             _healthComponent.OnEnable();
             _switchingItemComponent.OnEnable();
+            _swapItemComponent.OnEnable();
         }
         
         internal void Update()
@@ -96,6 +106,7 @@ namespace Objects
         {
             _healthComponent.OnDisable();
             _switchingItemComponent.OnDisable();
+            _swapItemComponent.OnDisable();
         }
         
         public void Dispose()
@@ -104,6 +115,8 @@ namespace Objects
             _moveComponent?.Dispose();
             _rotationComponent?.Dispose();
             _switchingItemComponent.Dispose();
+            _takeRewardComponent.Dispose();
+            _swapItemComponent.Dispose();
         }
     }
 }

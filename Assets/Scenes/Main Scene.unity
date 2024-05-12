@@ -201,6 +201,11 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!1 &131341372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6859301534867043552, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+  m_PrefabInstance: {fileID: 7052479427960262335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171975642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2280,17 @@ Transform:
   - {fileID: 618133960}
   m_Father: {fileID: 1412946373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2064688639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2723044411928874041, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+  m_PrefabInstance: {fileID: 7052479427960262335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131341372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47c2de0be5e41418782f60a51d644c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2071277244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7609784600480944271, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
@@ -2424,6 +2440,8 @@ MonoBehaviour:
   - {fileID: 9186384065106272059, guid: 36382d12f6cc4514e9c3d932b0bc1a55, type: 3}
   - {fileID: 7166298555134498381, guid: 99700184cf2369b46900b50c77847135, type: 3}
   _productContainer: {fileID: 1366572002}
+  _berril: {fileID: 2064688639}
+  _swapWeaponIndex: 1
 --- !u!1 &2130863981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,6 +2890,34 @@ PrefabInstance:
     - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
       propertyPath: _core._healthComponent._hitPoints
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._weaponComponent._weapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._weaponComponent._weapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 2064688639}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._switchingItemComponent._items.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._switchingItemComponent._items.Array.data[3]
+      value: 
+      objectReference: {fileID: 131341372}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._switchingItemComponent._atomicItems.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537231753086427606, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: _core._switchingItemComponent._atomicItems.Array.data[3]
+      value: 
+      objectReference: {fileID: 2064688639}
+    - target: {fileID: 2924437855828357775, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7052479428711214791, guid: fa7851b6be19b5c43bd8c1a84a2c2716, type: 3}
       propertyPath: m_LocalPosition.x

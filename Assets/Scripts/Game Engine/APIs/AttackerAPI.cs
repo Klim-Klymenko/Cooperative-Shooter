@@ -14,6 +14,9 @@ namespace GameEngine
         public const string AttackAction = nameof(AttackAction);
         
         [Contract(typeof(IAtomicObservable))]
+        public const string AttackRequestObservable = nameof(AttackRequestObservable);
+        
+        [Contract(typeof(IAtomicObservable))]
         public const string AttackObservable = nameof(AttackObservable);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using GameCycle;
@@ -19,6 +18,9 @@ namespace Objects
         [Get(LiveableAPI.DeathObservable)]
         private IAtomicObservable DeathObservable => _core.DeathObservable;
         
+        [Get(LiveableAPI.AliveCondition)]
+        private IAtomicValue<bool> AliveCondition => _core.AliveCondition;
+        
         [Get(MovableAPI.MovementDirection)]
         private IAtomicVariable<Vector3> MovementDirection => _core.MovementDirection;
 
@@ -36,6 +38,9 @@ namespace Objects
         
         [Get(RewardAPI.RewardAmount)]
         private IAtomicVariableObservable<int> RewardAmount => _core.RewardAmount;
+        
+        [Get(WeaponAPI.SwapWeaponAction)]
+        private IAtomicAction<int, AtomicObject> SwapWeaponAction => _core.SwapWeaponAction;
         
         [SerializeField]
         private Character_Core _core;

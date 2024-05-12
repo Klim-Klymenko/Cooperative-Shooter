@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Atomic.Elements;
 using Objects;
 using UnityEngine;
@@ -15,7 +14,6 @@ namespace GameEngine
         private readonly AtomicEvent _attackRequestEvent = new();
         private readonly AtomicEvent _attackEvent = new();
         
-        public IReadOnlyList<AtomicWeapon> Weapons => _weapons;
         public IAtomicObservable AttackRequestObservable => _attackRequestEvent;
         public IAtomicObservable AttackObservable => _attackEvent;
 

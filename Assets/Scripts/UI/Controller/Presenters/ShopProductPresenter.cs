@@ -1,6 +1,5 @@
 ﻿using GameEngine.Shop;
 using GameEngine.Shop.Configs;
-using JetBrains.Annotations;
 using UI.View;
 using UnityEngine;
 
@@ -14,13 +13,16 @@ namespace UI.Controller.Presenters
         public string Quantity { get; }
 
         private readonly IProductBuyer _productBuyer;
+        private readonly IPurchaseEffect _purchaseEffect;
         private readonly int _price;
-        
-        internal ShopProductPresenter(ProductInfo productInfo, IProductBuyer productBuyer)
+
+        internal ShopProductPresenter(ProductInfo productInfo, IProductBuyer productBuyer, IPurchaseEffect purchaseEffect)
         {
             _productBuyer = productBuyer;
-            _price = productInfo.Price;
             
+            _purchaseEffect = purchaseEffect;
+            _price = productInfo.Price;
+
             Icon = productInfo.Icon;
             Frame = productInfo.Frame;
             Price = _price.ToString();
@@ -29,7 +31,10 @@ namespace UI.Controller.Presenters
         
         void IShopProductPresenter.BuyProduct()
         {
+            if (!_productBuyer.CanBuyProduct(_price)) return;
+         
             _productBuyer.BuyProduct(_price);
+            _purchaseEffect.Invoke();
         }
     }
 }

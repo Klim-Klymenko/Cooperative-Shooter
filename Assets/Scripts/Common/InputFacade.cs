@@ -64,6 +64,9 @@ namespace Common.LocalInput
         public bool SwitchingSlot1Button => IsAlpha1Down;
         public bool SwitchingSlot2Button => IsAlpha2Down;
         public bool SwitchingSlot3Button => IsAlpha3Down;
+        
+        public bool OpenShopMenuButton => IsEDown;
+        public bool CloseShopMenuButton => IsEUp;
 
         #endregion
     }

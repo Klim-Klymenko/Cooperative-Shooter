@@ -145,6 +145,12 @@ namespace Atomic.Extensions
         {
             it.GetAction<T>(name)?.Invoke(args);
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void InvokeAction<T, T1>(this IAtomicObject it, string name, T args, T1 args1)
+        {
+            it.GetAction<T, T1>(name)?.Invoke(args, args1);
+        }
 
         public static IAtomicSetter<T> GetSetter<T>(this IAtomicObject it, string name)
         {

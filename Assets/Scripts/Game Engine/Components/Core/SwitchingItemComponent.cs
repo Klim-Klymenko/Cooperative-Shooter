@@ -9,23 +9,30 @@ namespace GameEngine
     [Serializable]
     public sealed class SwitchingItemComponent : IDisposable
     {
+        [SerializeField] 
+        private GameObject[] _items;
+        
+        [SerializeField]
+        private AtomicObject[] _atomicItems;
+        
         [SerializeField]
         private AtomicVariable<AtomicObject> _currentItem;
         
         private readonly AtomicVariable<int> _currentItemIndex = new(0);
-
+        
         private SwitchItemMechanics _switchItemMechanics;
         private AssignCurrentItemMechanics _assignCurrentItemMechanics;
 
-        public IAtomicVariable<int> CurrentItemIndex => _currentItemIndex;
-        public IAtomicValueObservable<AtomicObject> CurrentItem => _currentItem;
+        public GameObject[] ItemsGO => _items;
+        public AtomicObject[] AtomicItems => _atomicItems;
         
-        public void Compose(AtomicObject[] items)
+        public IAtomicVariable<int> CurrentItemIndex => _currentItemIndex;
+        public IAtomicVariableObservable<AtomicObject> CurrentItem => _currentItem;
+
+        public void Compose()
         {
-            GameObject[] itemsGO = items.Select(gun => gun.gameObject).ToArray();
-            
-            _switchItemMechanics = new SwitchItemMechanics(itemsGO, _currentItemIndex);
-            _assignCurrentItemMechanics = new AssignCurrentItemMechanics(items, _currentItemIndex, _currentItem);
+            _switchItemMechanics = new SwitchItemMechanics(_items, _currentItemIndex);
+            _assignCurrentItemMechanics = new AssignCurrentItemMechanics(_atomicItems, _currentItemIndex, _currentItem);
         }
 
         public void OnEnable()

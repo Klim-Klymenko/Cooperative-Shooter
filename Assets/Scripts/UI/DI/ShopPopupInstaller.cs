@@ -45,12 +45,21 @@ namespace UI.DI
         
         [SerializeField]
         private Transform _productContainer;
+
+        [Header("Purchase Effects")] 
+        
+        [SerializeField]
+        private AtomicObject _berril;
+        
+        [SerializeField]
+        private int _swapWeaponIndex;
         
         public override void InstallBindings()
         {
             BindBuyer();
             BindManager();
             BindCatalog();
+            BindPurchaseEffects();
             BindPools();
             BindFactories();
         }
@@ -68,6 +77,12 @@ namespace UI.DI
         private void BindCatalog()
         {
             Container.Bind<ProductCatalog>().FromInstance(_productCatalog).AsSingle();
+        }
+
+        private void BindPurchaseEffects()
+        {
+            for (int i = 0; i < _productViewPrefabs.Length; i++)
+                Container.Bind<IPurchaseEffect>().To<GunPurchaseEffect>().AsCached().WithArguments(_character, _berril, _swapWeaponIndex);
         }
         
         private void BindPools()

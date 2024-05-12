@@ -26,9 +26,9 @@ namespace GameEngine
             _switchingItemObservable.Unsubscribe(OnItemSwitched);
         }
 
-        private void OnItemSwitched(int gunIndex)
+        private void OnItemSwitched(int itemIndex)
         {
-            _currentItem.Value = _items[gunIndex];
+            _currentItem.Value = _items[itemIndex];
         }
     }
 }

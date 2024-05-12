@@ -36,7 +36,10 @@ namespace Objects
         
         private readonly AndExpression _aliveCondition = new();
         
+        [Get(AttackerAPI.AttackRequestObservable)]
         public override IAtomicObservable AttackRequestObservable => _shootComponent.ShootRequestObservable;
+        
+        [Get(AttackerAPI.AttackObservable)]
         public override IAtomicObservable AttackObservable => _shootComponent.ShootObservable;
         
         private IBulletSpawner _bulletSpawner;

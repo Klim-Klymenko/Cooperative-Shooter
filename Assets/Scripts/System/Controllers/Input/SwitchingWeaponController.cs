@@ -12,6 +12,7 @@ namespace System
     internal sealed class SwitchingWeaponController : IStartGameListener, IUpdateGameListener
     {
         private IAtomicVariable<int> _currentWeaponIndex;
+        private IAtomicValue<bool> _aliveCondition;
 
         private readonly InputFacade _input;
         private readonly IAtomicObject _attacker;
@@ -25,10 +26,13 @@ namespace System
         void IStartGameListener.OnStart()
         {
             _currentWeaponIndex = _attacker.GetVariable<int>(WeaponAPI.CurrentWeaponIndex);
+            _aliveCondition = _attacker.GetValue<bool>(LiveableAPI.AliveCondition);
         }
         
         void IUpdateGameListener.OnUpdate()
         {
+            if (!_aliveCondition.Value) return;
+            
             if (_input.SwitchingSlot1Button)
                 _currentWeaponIndex.Value = 0;
             

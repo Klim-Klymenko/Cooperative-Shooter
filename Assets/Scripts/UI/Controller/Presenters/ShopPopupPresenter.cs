@@ -12,15 +12,15 @@ namespace UI.Controller.Presenters
         private readonly IShopProductPresenter[] _productPresenters;
         public IReadOnlyList<IShopProductPresenter> ProductPresenters => _productPresenters;
         
-        internal ShopPopupPresenter(ProductCatalog catalog, IProductBuyer productBuyer)
+        internal ShopPopupPresenter(ProductCatalog catalog, IProductBuyer productBuyer, IPurchaseEffect[] purchaseEffects)
         {
             IReadOnlyList<ProductInfo> productInfos = catalog.ProductInfos;
             
             _productPresenters = new IShopProductPresenter[productInfos.Count];
-            
+           
             for (int i = 0; i < _productPresenters.Length; i++)
             {
-                ShopProductPresenter productPresenter = new(productInfos[i], productBuyer);
+                ShopProductPresenter productPresenter = new(productInfos[i], productBuyer, purchaseEffects[i]);
                 _productPresenters[i] = productPresenter;
             }
         }

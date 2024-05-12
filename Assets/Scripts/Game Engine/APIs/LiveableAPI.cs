@@ -13,5 +13,8 @@ namespace GameEngine
         
         [Contract(typeof(IAtomicObservable))]
         public const string DeathObservable = nameof(DeathObservable);
+        
+        [Contract(typeof(IAtomicValue<bool>))]
+        public const string AliveCondition = nameof(AliveCondition);
     }
 }

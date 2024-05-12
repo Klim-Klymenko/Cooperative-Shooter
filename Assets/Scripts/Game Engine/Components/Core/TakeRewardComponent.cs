@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GameEngine.Components
 {
     [Serializable]
-    public sealed class TakeRewardComponent
+    public sealed class TakeRewardComponent : IDisposable
     {
         private readonly AtomicVariable<int> _currentRewardAmount = new(0);
         
@@ -38,6 +38,11 @@ namespace GameEngine.Components
         public void OnTriggerEnter(Collider other)
         {
             _passOnTargetMechanics.OnTriggerEnter(other);
+        }
+
+        public void Dispose()
+        {
+            _currentRewardAmount?.Dispose();
         }
     }
 }
